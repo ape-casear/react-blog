@@ -1,0 +1,99 @@
+/* side-bar css */
+@media (min-width: 768px){
+    .navi-wrap {
+        width: 160px;
+       
+        transition: all 0.5s ease-out;
+    }
+    .adapt-visible{
+        display: none;
+    }
+}
+@media (max-width: 768px){
+    .navi-wrap {
+        margin-left: -160px;
+        width: 160px;
+        transition: all 0.5s ease-in;
+    }
+    .adapt-visible{
+        display: inline-block;
+    }
+}
+.navi-wrap {
+    position: fixed;
+    top: 56px;
+    left: 0px;
+    height: 100%;
+    background-color: #3a3f51;
+    overflow: scroll;
+    a{
+        color: #a6a8b1;
+    }
+    .subbar{
+        
+        font-size: 0.8em;
+    }
+    .subbar:hover{
+        background-color: rgb(28, 31, 43);
+    }
+    .afterRectangular::after{
+        display: inline-block;
+        width: 0;
+        height: 0;
+        margin-left: 0.255em;
+        vertical-align: 0.255em;
+        content: "";
+        border-top: 0.3em solid;
+        border-right: 0.3em solid transparent;
+        border-bottom: 0;
+        border-left: 0.3em solid transparent;
+    }
+    .nav-item:hover{
+        background-color: #2b2f3d;
+    }
+}
+.side-toggle-off{
+    margin-left: -160px; 
+    width: 160px;
+    transition: all 0.5s ease-in;
+}
+.side-toggle-on{
+    margin-left: 0px; 
+    width: 160px;
+    
+    transition: all 0.5s ease-out;
+}
+
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, 
+.col-8, .col-9, .col-10, .col-11, .col-12, .col, .col-auto,
+ .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, 
+ .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, 
+ .col-sm-11, .col-sm-12, .col-sm, .col-sm-auto, .col-md-1, 
+ .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, 
+ .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, 
+ .col-md-12, .col-md, .col-md-auto, .col-lg-1, .col-lg-2, 
+ .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, 
+ .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, 
+ .col-lg, .col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, 
+ .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, 
+ .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl, 
+ .col-xl-auto{
+     background-color: rgba(49, 89, 150, 0.644);
+     margin:1px;
+ }
+
+ /*滚动条样式*/
+.navi-wrap::-webkit-scrollbar {/*滚动条整体样式*/
+    width: 0px;     /*高宽分别对应横竖滚动条的尺寸*/
+    height: 4px;
+}
+.navi-wrap::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px #3a3f51;
+    background: #3a3f51;
+}
+.navi-wrap::-webkit-scrollbar-track {/*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px #3a3f51;
+    border-radius: 0;
+    background: #3a3f51;
+}
