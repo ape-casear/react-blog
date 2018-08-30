@@ -1,3 +1,6 @@
+/* varible */
+@rightBarWidth: 230px;
+
 /* side-bar css */
 @media (min-width: 768px){
     .navi-wrap {
@@ -10,13 +13,24 @@
     }
     .big-table{
         .bg-img{
-            background: #a6a8b1 url(../images/static_imgs/webPic.jpg) no-repeat fixed top;
+            background: #a6a8b1 url(../images/static_imgs/webPic.jpg) no-repeat fixed top right;
             
         }
     }
     .main-box{
         margin-left: 160px;
-
+        width:  calc(100% - 160px);
+    }
+    .main-box-left{
+        max-width: calc(100% - @rightBarWidth);
+        transition: max-width 0.3s ease-in-out;
+     }
+    .main-box-right{
+        max-width: @rightBarWidth;
+        position: relative;
+        padding-right: 0px;
+        margin-top: -1rem;
+        right: -1px;
     }
 }
 @media (max-width: 768px){
@@ -36,7 +50,9 @@
     }
     .main-box{
         margin-left: 0px;
-
+        width:  100%;
+    }
+    .main-box-right{
     }
 }
 .navi-wrap {
@@ -113,13 +129,20 @@
 }
 
 
-
+#root{
+    
+}
 
 
 
 
 /* common  */
-
+.font-white{
+    color: white;
+}
+.font-shadow{
+    text-shadow: 0px 0px 5px rgb(85, 85, 85);
+}
 .scrollable{
     overflow: scroll;
 }

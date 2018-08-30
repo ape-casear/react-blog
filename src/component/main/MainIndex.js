@@ -28,6 +28,9 @@ import { Button, CardImg, CardTitle, CardSubtitle, Card, CardText, CardBody, Nav
         })
         return (
             <div className="main-card">
+                <h2 className="font-white font-shadow">Ape-Caesar's SEXY HOUSE</h2>
+                <h6 className="font-white font-shadow">男性の変態は何が問題なのですか？</h6>
+                <h6 className="font-white font-shadow">is there has any problem with man's lechery?</h6>
                 {list}
             </div>
         )

@@ -19,13 +19,13 @@ import MainBox from './MainBox';
         console.log(e.target)
     }
     render(){
-        
+        // this.props.window.innerHeight
         return (
-            <div className="big-table" style={{height: this.props.window.innerHeight}}
+            <div className="big-table" style={{}}
              onClick={this.click}>
                 <Head></Head>
                 <SideBar></SideBar>
-                {/* <div className="bg-img" style={{height: this.props.window.innerHeight, width: this.props.window.innerWidth}}></div> */}
+                <div className="bg-img" style={{height: this.props.window.innerHeight, width: this.props.window.innerWidth}}></div>
                 <Switch>
                     <Route path="/" component={MainBox}></Route>
                 </Switch>

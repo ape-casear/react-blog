@@ -18,12 +18,12 @@ import RightBar from './main/RightBar';
         return (
             <div className="main-box">
                 <Row >
-                    <Col  xs="12" md="8">
+                    <Col className="main-box-left" xs="12" >
                         <Switch>
                             <Route path="/" name="index" component={MainIndex}></Route>
                         </Switch>
                     </Col>
-                    <Col  xs="12" md="4">
+                    <Col className="main-box-right" xs="12">
                         <RightBar></RightBar>
                     </Col>
                 </Row>
