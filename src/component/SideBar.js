@@ -5,6 +5,8 @@ import { Button, Container, Row, Col, Nav, NavItem, NavLink, Dropdown,DropdownTo
 } from 'reactstrap';
 import FontAwesome from  'react-fontawesome';
 import UpInfo from './UpInfo';
+import { side_bar } from '../config/layout-config';
+import { history } from '../store/configureStore';
  class SideBar extends Component{
     constructor() {
         super();
@@ -13,28 +15,53 @@ import UpInfo from './UpInfo';
             active: 0
         }
         this.toggle = this.toggle.bind(this);
-        this.activeBar = this.activeBar.bind(this);
+        this.navigateTo = this.navigateTo.bind(this);
     }
     toggle() {
         this.setState({
             dropdownOpen: !this.state.dropdownOpen
         });
     }
-    activeBar(num){
-        this.setState({
-            active: num
-        })
+    navigateTo(e){
+        if(e.target.dataset.route){
+            console.log('navigateTo')
+            history.push('/'+ e.target.dataset.route)
+        }
     }
     render(){
         console.log(this.props.side_toggle)
+
+        let list = side_bar.map(item=>{
+            return (
+                <NavItem key={item.id}>
+                    <NavLink className={item.link.className} id={item.link.id} href='#'
+                    onClick={this.navigateTo} data-route={item.href}>
+                        <FontAwesome className={item.icon.className} data-route={item.href} name={item.icon.name} size="lg"></FontAwesome>
+                    {item.name}
+                    </NavLink>
+                    {
+                        (()=>{
+                            if(item.sub_link)
+                                return (<UncontrolledCollapse toggler={'#'+item.link.id}>
+                                    {item.sub_link.map(sub_item=>{
+                                        return (<NavLink key={sub_item.id} className={sub_item.className} data-route={sub_item.name} href="#" onClick={this.navigateTo}>
+                                        <FontAwesome className={sub_item.icon.className} data-route={sub_item.name} name={sub_item.icon.name} size="lg"/>
+                                        {sub_item.name}</NavLink>)
+                                    })}
+                                    </UncontrolledCollapse>)
+                        })()
+                    }
+                </NavItem>
+            )
+        })
         return (
-            <div className={"navi-wrap side-toggle-"+ this.props.side_toggle }>
+            <div className={"navi-wrap scrollable side-toggle-"+ this.props.side_toggle }>
               <UpInfo></UpInfo>
               <Nav  vertical>
                     <NavItem active={true} onClick={()=>this.activeBar(1)}>
                         <NavLink href="#" >Link</NavLink>
                     </NavItem>
-                    <Dropdown direction="right" nav isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+                    <Dropdown direction="up" nav isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                         <DropdownToggle nav caret>
                         Dropdown
                         </DropdownToggle>
@@ -47,41 +74,12 @@ import UpInfo from './UpInfo';
                         </DropdownMenu>
                     </Dropdown>
                     <hr style={{filter : "alpha(opacity=100,finishopacity=0,style=3)", margin: '0.3em auto', width:"80%", borderTop:"1px solid #a6a8b1"}} />
-                    <NavItem active={this.state.active == 2} onClick={()=>this.activeBar(2)}>
-                        <NavLink caret className="afterRectangular" id="toggler1" href="">
-                        <FontAwesome className="super-crazy-colors fa-fw" name="external-link-square" size="lg"/>Link</NavLink>
-                        <UncontrolledCollapse toggler="#toggler1">
-                            <NavLink className="subbar" href="#">sub Link</NavLink>
-                            <NavLink className="subbar" href="#">sub Link</NavLink>
-                            <NavLink className="subbar" href="#">sub Link</NavLink>
-                        </UncontrolledCollapse>
-                    </NavItem>
-                    <NavItem active={this.state.active == 3} onClick={()=>this.activeBar(3)}>
-                        
-                        <NavLink caret className="afterRectangular" id="toggler2" href="">
-                        <FontAwesome className="super-crazy-colors fa-fw" name="external-link-square" size="lg"></FontAwesome>Link
-                        </NavLink>
-                        <UncontrolledCollapse toggler="#toggler2">
-                            <NavLink className="subbar" href="#">
-                                <FontAwesome className="super-crazy-colors fa-fw" name="external-link-square" size="lg"/>
-                            sub Link</NavLink>
-                            <NavLink className="subbar" href="#">sub Link</NavLink>
-                            <NavLink className="subbar" href="#">sub Link</NavLink>
-                        </UncontrolledCollapse>
-                    </NavItem>
-                    <NavItem active={this.state.active == 4} onClick={()=>this.activeBar(4)}>
-                        <NavLink caret className="afterRectangular" id="toggler3" href="">
-                        <FontAwesome className="super-crazy-colors fa-fw" name="external-link-square" size="lg"/>Link</NavLink>
-                        <UncontrolledCollapse toggler="#toggler3">
-                            <NavLink className="subbar" href="#">sub Link</NavLink>
-                            <NavLink className="subbar" href="#">sub Link</NavLink>
-                            <NavLink className="subbar" href="#">sub Link</NavLink>
-                        </UncontrolledCollapse>
-                    </NavItem>
-                    <NavItem active={this.state.active == 5} onClick={()=>this.activeBar(5)}>
+                    
+                    {list}
+                    <NavItem >
                         <NavLink href="#">Another Link</NavLink>
                     </NavItem>
-                    <NavItem active={this.state.active == 6} onClick={()=>this.activeBar(6)}>
+                    <NavItem >
                         <NavLink  href="#">Disabled Link</NavLink>
                     </NavItem>
                 </Nav>
@@ -93,7 +91,7 @@ import UpInfo from './UpInfo';
     
     let { layout } = state;
     return {
-        side_toggle: layout.sidebar
+        side_toggle: layout.sidebar,
     }
 }   
  export default connect(mapStateToProps)(SideBar)

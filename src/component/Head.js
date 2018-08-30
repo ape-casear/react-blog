@@ -4,7 +4,8 @@ import { Button, Container, Row, Col, Nav, NavItem, NavLink, Dropdown,DropdownTo
     Navbar,NavbarBrand,NavbarToggler,Collapse,UncontrolledDropdown
 } from 'reactstrap';
 import FontAwesome from  'react-fontawesome';
-
+import { history } from '../store/configureStore';
+import { stopEvent } from '../util/html-util/stopEvent'
  class Head extends Component{
     constructor(){
         super();
@@ -14,6 +15,7 @@ import FontAwesome from  'react-fontawesome';
         }
         this.toggle = this.toggle.bind(this)
         this.closeSideBar = this.closeSideBar.bind(this)
+        this.gohome = this.gohome.bind(this)
     }
     toggle(){
         this.setState({
@@ -21,14 +23,16 @@ import FontAwesome from  'react-fontawesome';
         })
     }
     closeSideBar(e){
-        e.stopPropagation();
-        e.nativeEvent.stopImmediatePropagation();
-        e.preventDefault();
+        stopEvent(e)
         let type = this.props.side_toggle == 'on'? 'off': 'on';
         this.setState({
             orientation: this.state.orientation == 'expand'? 'compress':'expand'
         })
         this.props.dispatch({type: 'switch sideOutIn', payload: { sidebar: type }})
+    }
+    gohome(e){
+        stopEvent(e)
+        history.push('/')
     }
     
     render(){
@@ -38,12 +42,13 @@ import FontAwesome from  'react-fontawesome';
             }else if(window.innerWidth <= 768){
                 this.props.dispatch({type: 'switch sideOutIn', payload: { sidebar: 'off' }})
             }
+            this.props.dispatch({type: 'windowSize', payload: { innerWidth: window.innerWidth ,innerHeight: window.innerHeight}})
         };
         return (
-            <Navbar color="light" light expand="md">
-            <NavbarBrand href="/">
-            <FontAwesome  style={{fontSize: '1em', marginLeft: '8px'}} name="home" size="lg"/>
-            &nbsp;WDW-React
+            <Navbar className="fixedable-top" color="dark" dark expand="md">
+            <NavbarBrand href="#">
+            <FontAwesome  style={{fontSize: '1.3rem', marginLeft: '8px'}} name="home" size="lg" onClick={this.gohome}/>
+            &nbsp;WDW-React&nbsp;
                 <FontAwesome className="adapt-visible" style={{fontSize: '1.33rem', marginLeft: '8px'}} name={this.state.orientation} size="lg"
                     onClick={this.closeSideBar}>
                 </FontAwesome>
@@ -96,10 +101,11 @@ import FontAwesome from  'react-fontawesome';
 
  function mapStateToProps(state){
     
-    let { color, layout} = state;
+    let { color, layout, window} = state;
     return {
         color: color.color,
-        side_toggle: layout.sidebar
+        side_toggle: layout.sidebar,
+        window: window
     }
 }   
 

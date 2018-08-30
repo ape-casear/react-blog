@@ -3,29 +3,51 @@
     .navi-wrap {
         width: 160px;
        
-        transition: all 0.5s ease-out;
+        transition: all 0.5s ease-in-out;
     }
     .adapt-visible{
         display: none;
+    }
+    .big-table{
+        .bg-img{
+            background: #a6a8b1 url(../images/static_imgs/webPic.jpg) no-repeat fixed top;
+            
+        }
+    }
+    .main-box{
+        margin-left: 160px;
+
     }
 }
 @media (max-width: 768px){
     .navi-wrap {
         margin-left: -160px;
         width: 160px;
-        transition: all 0.5s ease-in;
+        transition: all 0.5s ease-in-out;
     }
     .adapt-visible{
         display: inline-block;
     }
+    .big-table{
+        .bg-img{
+            background: #a6a8b1 url(../images/static_imgs/webPic2.jpg) no-repeat fixed top;
+            background-size:cover;
+        }
+    }
+    .main-box{
+        margin-left: 0px;
+
+    }
 }
 .navi-wrap {
     position: fixed;
-    top: 56px;
+    top: 0px;
     left: 0px;
+    padding-top: 56px;
+    z-index: 1;
     height: 100%;
     background-color: #3a3f51;
-    overflow: scroll;
+    /* overflow: scroll; */
     a{
         color: #a6a8b1;
     }
@@ -52,48 +74,58 @@
         background-color: #2b2f3d;
     }
 }
+.bg-img{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    z-index: 0;
+}
 .side-toggle-off{
     margin-left: -160px; 
     width: 160px;
-    transition: all 0.5s ease-in;
+    transition: all 0.5s ease-in-out;
 }
 .side-toggle-on{
     margin-left: 0px; 
     width: 160px;
     
-    transition: all 0.5s ease-out;
+    transition: all 0.5s ease-in-out;
 }
 
-.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, 
-.col-8, .col-9, .col-10, .col-11, .col-12, .col, .col-auto,
- .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, 
- .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, 
- .col-sm-11, .col-sm-12, .col-sm, .col-sm-auto, .col-md-1, 
- .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, 
- .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, 
- .col-md-12, .col-md, .col-md-auto, .col-lg-1, .col-lg-2, 
- .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, 
- .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, 
- .col-lg, .col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, 
- .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, 
- .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl, 
- .col-xl-auto{
-     background-color: rgba(49, 89, 150, 0.644);
-     margin:1px;
- }
+
 
  /*滚动条样式*/
-.navi-wrap::-webkit-scrollbar {/*滚动条整体样式*/
+.scrollable::-webkit-scrollbar {/*滚动条整体样式*/
     width: 0px;     /*高宽分别对应横竖滚动条的尺寸*/
     height: 4px;
 }
-.navi-wrap::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+.scrollable::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
     border-radius: 5px;
     -webkit-box-shadow: inset 0 0 5px #3a3f51;
     background: #3a3f51;
 }
-.navi-wrap::-webkit-scrollbar-track {/*滚动条里面轨道*/
+.scrollable::-webkit-scrollbar-track {/*滚动条里面轨道*/
     -webkit-box-shadow: inset 0 0 5px #3a3f51;
     border-radius: 0;
     background: #3a3f51;
+}
+
+
+
+
+
+
+
+/* common  */
+
+.scrollable{
+    overflow: scroll;
+}
+.fixedable-top{
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 2;
 }

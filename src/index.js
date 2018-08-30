@@ -1,7 +1,7 @@
 import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route } from 'react-router';
+import { Router, Route, Switch } from 'react-router';
 import './index.css';
 import App from './App';
 import BigTable from './component/BigTable'
@@ -15,10 +15,10 @@ let store = configureStore()
 ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
-            <div>
+            <Switch>
                 <Route path="/app" component={App}/>
-                <Route path="/index" component={BigTable}/>
-            </div>
+                <Route  path="/" component={BigTable}/>
+            </Switch>
         </Router>
     </Provider>, 
     document.getElementById('root')

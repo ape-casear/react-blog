@@ -12,7 +12,7 @@ class App extends Component {
     this.gotoTest = this.gotoTest.bind(this)
   }
   gotoTest(){
-    console.log(this.props.history.push('/index'))
+    console.log(this.props)
   }
   render() {
     let style = {
@@ -33,8 +33,7 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
         {test1}
-        <JOJO/>
-        <Card/>
+       
       </div>
     );
   }
