@@ -30,13 +30,13 @@ import FontAwesome from  'react-fontawesome';
                         <hr style={{filter : "alpha(opacity=100,finishopacity=0,style=3)", margin: '0.5em auto', width:"100%", borderTop:"1px solid #ccc"}} />
                         <Nav style={{fontSize: '14px', fontWeight: '300'}}>
                             <NavItem style={{marginRight: "5px"}}>
-                            <FontAwesome className="fa-fw" name="user" size="lg"/>&nbsp;wdw
+                            <FontAwesome className="fa-fw" name="user" />&nbsp;wdw
                             </NavItem>
                             <NavItem style={{marginRight: "5px"}}>
-                            <FontAwesome className="fa-fw" name="calendar" size="lg"/>&nbsp;2018-08-25 15:00
+                            <FontAwesome className="fa-fw" name="clock-o" />&nbsp;2018-08-25 15:00
                             </NavItem>
                             <NavItem style={{marginRight: "5px"}}>
-                            <FontAwesome className="fa-fw" name="comments-o" size="lg"/>&nbsp;28
+                            <FontAwesome className="fa-fw" name="comments-o" />&nbsp;28
                             </NavItem>
                         </Nav>
                     </CardBody>

@@ -3,6 +3,6 @@ export default store => next => action => {
     let pre = store.getState();
     let state = next(action)
     let now = store.getState();
-    
+    console.log(now)
     return state;
   }

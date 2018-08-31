@@ -37,9 +37,9 @@ import { stopEvent } from '../util/html-util/stopEvent'
     componentDidMount(){
         window.onresize = ()=>{
             if(window.innerWidth > 768){
-                this.props.dispatch({type: 'switch sideOutIn', payload: { sidebar: 'on' }})
+                this.props.side_toggle=='off'&&this.props.dispatch({type: 'switch sideOutIn', payload: { sidebar: 'on' }})
             }else if(window.innerWidth <= 768){
-                this.props.dispatch({type: 'switch sideOutIn', payload: { sidebar: 'off' }})
+                this.props.side_toggle=='on'&&this.props.dispatch({type: 'switch sideOutIn', payload: { sidebar: 'off' }})
             }
             this.props.dispatch({type: 'windowSize', payload: { innerWidth: window.innerWidth ,innerHeight: window.innerHeight}})
         };
@@ -47,7 +47,7 @@ import { stopEvent } from '../util/html-util/stopEvent'
     render(){
         return (
             <Navbar className="fixedable-top" color="dark" dark expand="md">
-            <NavbarBrand href="#">
+            <NavbarBrand href="">
             <FontAwesome  style={{fontSize: '1.3rem', marginLeft: '8px'}} name="home" size="lg" onClick={this.gohome}/>
             &nbsp;WDW-React&nbsp;
                 <FontAwesome className="adapt-visible" style={{fontSize: '1.33rem', marginLeft: '8px'}} name={this.state.orientation} size="lg"

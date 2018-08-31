@@ -36,7 +36,7 @@ import { history } from '../store/configureStore';
                 <NavItem key={item.id}>
                     <NavLink className={item.link.className} id={item.link.id} href='#'
                     onClick={this.navigateTo} data-route={item.href}>
-                        <FontAwesome className={item.icon.className} data-route={item.href} name={item.icon.name} size="lg"></FontAwesome>
+                        <FontAwesome className={item.icon.className} data-route={item.href} name={item.icon.name} ></FontAwesome>
                     {item.name}
                     </NavLink>
                     {
@@ -45,7 +45,7 @@ import { history } from '../store/configureStore';
                                 return (<UncontrolledCollapse toggler={'#'+item.link.id}>
                                     {item.sub_link.map(sub_item=>{
                                         return (<NavLink key={sub_item.id} className={sub_item.className} data-route={sub_item.name} href="#" onClick={this.navigateTo}>
-                                        <FontAwesome className={sub_item.icon.className} data-route={sub_item.name} name={sub_item.icon.name} size="lg"/>
+                                        <FontAwesome className={sub_item.icon.className} data-route={sub_item.name} name={sub_item.icon.name} />
                                         {sub_item.name}</NavLink>)
                                     })}
                                     </UncontrolledCollapse>)

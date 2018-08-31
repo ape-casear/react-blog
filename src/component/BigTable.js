@@ -7,6 +7,7 @@ import { Button, Container, Row, Col, Nav, NavItem, NavLink, Dropdown,DropdownTo
 import Head from './Head'; 
 import SideBar from './SideBar'; 
 import MainBox from './MainBox';
+import FontAwesome from  'react-fontawesome';
  class BigTable extends Component{
     constructor() {
         super();
@@ -14,9 +15,13 @@ import MainBox from './MainBox';
             height: 0,
         }
         this.click=this.click.bind(this)
+        this.goTop=this.goTop.bind(this)
     }
     click(e){
-        console.log(e.target)
+        
+    }
+    goTop(){
+        window.scrollTo(0,0)
     }
     render(){
         // this.props.window.innerHeight
@@ -26,6 +31,10 @@ import MainBox from './MainBox';
                 <Head></Head>
                 <SideBar></SideBar>
                 <div className="bg-img" style={{height: this.props.window.innerHeight, width: this.props.window.innerWidth}}></div>
+                <div className="go-top" style={!this.props.window.goTop?{marginRight:"-50px"}:{}}
+                onClick={this.goTop}>
+                <FontAwesome className="fa fa-fw" name="arrow-circle-up" size="1x"/>
+                </div>
                 <Switch>
                     <Route path="/" component={MainBox}></Route>
                 </Switch>

@@ -25,7 +25,7 @@ import FontAwesome from  'react-fontawesome';
                     <BreadcrumbItem active tag="span">正文</BreadcrumbItem>
 
                     <div className="share" >分享到:
-                    <FontAwesome name="weibo" className="fa-fw" size="lg"/>
+                    <FontAwesome name="weibo" className="fa-fw"/>
                     </div>
                 </Breadcrumb>
                 </div>
