@@ -6,6 +6,7 @@ import { Button, Container, Row, Col, Nav, NavItem, NavLink, Dropdown,DropdownTo
 } from 'reactstrap';
 import MainIndex from './main/MainIndex';
 import RightBar from './main/RightBar';
+import BlogContent from './main/BlogContent';
  class MainBox extends Component{
     constructor() {
         super();
@@ -14,13 +15,17 @@ import RightBar from './main/RightBar';
         }
        
     }
+    componentDidMount(){
+
+    }
     render(){
         return (
             <div className="main-box">
                 <Row >
                     <Col className="main-box-left" xs="12" >
                         <Switch>
-                            <Route path="/" name="index" component={MainIndex}></Route>
+                            <Route exact path="/" name="index" component={MainIndex}></Route>
+                            <Route path="/blog/:blog" name="index" component={BlogContent}></Route>
                         </Switch>
                     </Col>
                     <Col className="main-box-right" xs="12">

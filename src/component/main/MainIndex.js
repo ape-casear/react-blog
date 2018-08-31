@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, CardImg, CardTitle, CardSubtitle, Card, CardText, CardBody, NavLink, Dropdown,DropdownToggle, DropdownMenu,DropdownItem,
+import { Button, CardImg, CardTitle, CardSubtitle, Card, Nav, CardBody, NavItem, Dropdown,DropdownToggle, DropdownMenu,DropdownItem,
     Navbar,NavbarBrand,NavbarToggler,Collapse,UncontrolledDropdown
 } from 'reactstrap';
-
+import httpAction from '../../util/ajax/httpAction';
+import FontAwesome from  'react-fontawesome';
  class MainIndex extends Component{
     constructor() {
         super();
@@ -12,16 +13,32 @@ import { Button, CardImg, CardTitle, CardSubtitle, Card, CardText, CardBody, Nav
         }
        
     }
+    componentDidMount(){
+        this.props.dispatch(httpAction('/bloglist/0','get',null, (res)=>{
+            this.props.dispatch({type:'GET_BLOG_LIST_MAIN', payload: {blogList: res.data.data.bloglist} })
+        }))
+    }
     render(){
-        let list = [1,2,3].map((item, index)=>{
+        let blogList = this.props.blogList;
+        let list = blogList.map((item, index)=>{
             return (
                 <Card className="card-item" key={index}>
-                    <CardImg className="card-img" top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
+                    <div className="card-img" key="3" style={{backgroundImage: "url(" + require('../../images/static_imgs/webPic.jpg') + ")" }}/>
                     <CardBody className="card-body">
-                        <CardTitle>Card title</CardTitle>
+                        <CardTitle>{item.title}</CardTitle>
                         <CardSubtitle>Card subtitle</CardSubtitle>
-                        <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                        <Button>Button</Button>
+                        <hr style={{filter : "alpha(opacity=100,finishopacity=0,style=3)", margin: '0.5em auto', width:"100%", borderTop:"1px solid #ccc"}} />
+                        <Nav style={{fontSize: '14px', fontWeight: '300'}}>
+                            <NavItem style={{marginRight: "5px"}}>
+                            <FontAwesome className="fa-fw" name="user" size="lg"/>&nbsp;wdw
+                            </NavItem>
+                            <NavItem style={{marginRight: "5px"}}>
+                            <FontAwesome className="fa-fw" name="calendar" size="lg"/>&nbsp;2018-08-25 15:00
+                            </NavItem>
+                            <NavItem style={{marginRight: "5px"}}>
+                            <FontAwesome className="fa-fw" name="comments-o" size="lg"/>&nbsp;28
+                            </NavItem>
+                        </Nav>
                     </CardBody>
                 </Card>
             )
@@ -37,11 +54,8 @@ import { Button, CardImg, CardTitle, CardSubtitle, Card, CardText, CardBody, Nav
     }
  }
  function mapStateToProps(state){
-    
-    
     return {
-        
-        
+        blogList: state.mainIndex.blogList
     }
 }   
  export default connect(mapStateToProps)(MainIndex)

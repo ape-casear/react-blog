@@ -34,8 +34,7 @@ import { stopEvent } from '../util/html-util/stopEvent'
         stopEvent(e)
         history.push('/')
     }
-    
-    render(){
+    componentDidMount(){
         window.onresize = ()=>{
             if(window.innerWidth > 768){
                 this.props.dispatch({type: 'switch sideOutIn', payload: { sidebar: 'on' }})
@@ -44,6 +43,8 @@ import { stopEvent } from '../util/html-util/stopEvent'
             }
             this.props.dispatch({type: 'windowSize', payload: { innerWidth: window.innerWidth ,innerHeight: window.innerHeight}})
         };
+    }
+    render(){
         return (
             <Navbar className="fixedable-top" color="dark" dark expand="md">
             <NavbarBrand href="#">
