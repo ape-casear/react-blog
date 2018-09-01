@@ -9,8 +9,8 @@ import SideBar from './SideBar';
 import MainBox from './MainBox';
 import FontAwesome from  'react-fontawesome';
  class BigTable extends Component{
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             height: 0,
         }
@@ -31,9 +31,20 @@ import FontAwesome from  'react-fontawesome';
                 <Head></Head>
                 <SideBar></SideBar>
                 <div className="bg-img" style={{height: this.props.window.innerHeight, width: this.props.window.innerWidth}}></div>
-                <div className="go-top" style={!this.props.window.goTop?{marginRight:"-50px"}:{}}
+                <div className="go-top" style={!this.props.window.goTop?{marginRight:"-50px", marginLeft: '-100px',marginBottom: '-100px'}:{}}
                 onClick={this.goTop}>
-                <FontAwesome className="fa fa-fw" name="arrow-circle-up" size="1x"/>
+                {(()=>{
+                    if(this.props.window.innerWidth > 768){
+                        return (
+                            <img src={require("../images/static_imgs/kotori.png")}></img>
+                        )
+                    }else{
+                        return (
+                            <FontAwesome className="fa fa-fw" name="arrow-circle-up" />
+                        )
+                    }
+                })()
+                }
                 </div>
                 <Switch>
                     <Route path="/" component={MainBox}></Route>
@@ -43,10 +54,11 @@ import FontAwesome from  'react-fontawesome';
     }
  }
  function mapStateToProps(state){
-    const { window } = state
+    const { window, layout } = state
     
     return {
-        window
+        window,
+        layout
     }
 }   
  export default connect(mapStateToProps)(BigTable)

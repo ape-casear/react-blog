@@ -16,7 +16,7 @@ ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
             <Switch>
-                <Route path="/app" component={App}/>
+                <Route path="/login" component={App}/>
                 <Route  path="/" component={BigTable}/>
             </Switch>
         </Router>

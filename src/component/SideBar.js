@@ -8,8 +8,8 @@ import UpInfo from './UpInfo';
 import { side_bar } from '../config/layout-config';
 import { history } from '../store/configureStore';
  class SideBar extends Component{
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             dropdownOpen: false,
             active: 0

@@ -8,8 +8,8 @@ import MainIndex from './main/MainIndex';
 import RightBar from './main/RightBar';
 import BlogContent from './main/BlogContent';
  class MainBox extends Component{
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
       
         }

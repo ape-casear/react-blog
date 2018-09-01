@@ -6,10 +6,10 @@ import { Button, Container, Row, Col, Nav, NavItem, NavLink, Dropdown,DropdownTo
 import classnames from 'classnames';
 import FontAwesome from  'react-fontawesome';
 import httpAction from '../../util/ajax/httpAction';
-
+import qs from 'qs';
  class RightBar extends Component{
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             height: 0,
             activeTab: 0,
@@ -83,17 +83,18 @@ import httpAction from '../../util/ajax/httpAction';
             ]
         })
         window.onscroll = ()=>{
+            if(window.scrollY > 800){
+                !this.props.goTop&&this.props.dispatch({type: 'TOGGLE_GO_TOP', payload: {goTop: true}})
+            }else{
+                this.props.goTop&&this.props.dispatch({type: 'TOGGLE_GO_TOP', payload: {goTop: false}})
+            }
             let webinfo_box = document.querySelector('.webinfo-box')
+            if(!webinfo_box)return;
             let length = webinfo_box.scrollHeight + webinfo_box.offsetTop
             if(window.scrollY > length){
                 !this.state.show&&this.setState({show: true})
             }else{
                 this.state.show&&this.setState({show: false})
-            }
-            if(window.scrollY > 800){
-                !this.props.goTop&&this.props.dispatch({type: 'TOGGLE_GO_TOP', payload: {goTop: true}})
-            }else{
-                this.props.goTop&&this.props.dispatch({type: 'TOGGLE_GO_TOP', payload: {goTop: false}})
             }
         }
     }

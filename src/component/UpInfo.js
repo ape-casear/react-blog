@@ -6,8 +6,8 @@ import { Card, CardBody, CardTitle, CardSubtitle, CardText, CardLink, NavLink, D
 import FontAwesome from  'react-fontawesome';
 
 class UpInfo extends Component{
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             dropdownOpen: false,
             active: 0
@@ -23,7 +23,7 @@ class UpInfo extends Component{
                         <CardTitle>Ape-Caesar</CardTitle>
                         <CardSubtitle>天津大学</CardSubtitle>
                     </CardBody>
-                    <img width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
+                    <img width="100%" src={require('../images/static_imgs/pixiv001.jpg')} alt="Card image cap" />
                     <CardBody style={{padding: '0.5rem'}}>
                         <CardText>welcome to my blog</CardText>
                         <CardLink href="#">Card Link</CardLink>

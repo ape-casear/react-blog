@@ -5,35 +5,42 @@ import { Button, CardImg, CardTitle, CardSubtitle, Card, Nav, CardBody, NavItem,
 } from 'reactstrap';
 import httpAction from '../../util/ajax/httpAction';
 import FontAwesome from  'react-fontawesome';
+import { history } from '../../store/configureStore';
  class MainIndex extends Component{
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
       
         }
-       
+        this.toBlog = this.toBlog.bind();
     }
     componentDidMount(){
         this.props.dispatch(httpAction('/bloglist/0','get',null, (res)=>{
             this.props.dispatch({type:'GET_BLOG_LIST_MAIN', payload: {blogList: res.data.data.bloglist} })
         }))
     }
+    toBlog(e){
+        console.log(e.target.dataset)
+        history.push('/blog/'+e.target.dataset.id + "?title=" + e.target.dataset.title)
+    }
     render(){
         let blogList = this.props.blogList;
         let list = blogList.map((item, index)=>{
             return (
                 <Card className="card-item" key={index}>
-                    <div className="card-img" key="3" style={{backgroundImage: "url(" + require('../../images/static_imgs/webPic.jpg') + ")" }}/>
+                    <div className="card-img" key="3" onClick={this.toBlog} data-id={item.id} 
+                    data-title={item.title} style={{backgroundImage: "url(" + require('../../images/static_imgs/webPic.jpg') + ")" }}/>
                     <CardBody className="card-body">
-                        <CardTitle>{item.title}</CardTitle>
+                        <CardTitle data-id={item.id} onClick={this.toBlog}
+                        data-title={item.title}>{item.title}</CardTitle>
                         <CardSubtitle>Card subtitle</CardSubtitle>
                         <hr style={{filter : "alpha(opacity=100,finishopacity=0,style=3)", margin: '0.5em auto', width:"100%", borderTop:"1px solid #ccc"}} />
                         <Nav style={{fontSize: '14px', fontWeight: '300'}}>
                             <NavItem style={{marginRight: "5px"}}>
-                            <FontAwesome className="fa-fw" name="user" />&nbsp;wdw
+                            <FontAwesome className="fa-fw" name="user" />&nbsp;{item.author}
                             </NavItem>
                             <NavItem style={{marginRight: "5px"}}>
-                            <FontAwesome className="fa-fw" name="clock-o" />&nbsp;2018-08-25 15:00
+                            <FontAwesome className="fa-fw" name="clock-o" />&nbsp;{item.pub_datetime}
                             </NavItem>
                             <NavItem style={{marginRight: "5px"}}>
                             <FontAwesome className="fa-fw" name="comments-o" />&nbsp;28

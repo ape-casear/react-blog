@@ -1,9 +1,10 @@
 .main-card{
     display: flex;
+    width: 100%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: ;
+    max-width: 900px;
     .card-item{
         background-color: rgba(255, 255, 255, 0.8);
         margin-bottom: 1rem;
@@ -12,14 +13,31 @@
         .card-img{
             height: 200px;
             background: #fff url(../images/static_imgs/webPic2.jpg) no-repeat  center;
-            background-size: 100%;
+            background-size: 110%;
             transition: background-size 0.2s;
         }
         .card-img:hover{
-            background-size: 110%;
+            background-size: 120%;
         }
         .card-body{
-            
+            .card-title:hover{
+                color: rgb(68, 68, 68);
+            }
+        }
+    }
+    .blog{
+        padding: 1rem;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.8);
+        img{
+            display: block;
+            width: 100%;
+            max-width: 760px;
+            padding: 1rem;
+            border-radius: 10px;
+        }
+        code.hljs{
+            background-color: #3a3f51;
         }
     }
 }

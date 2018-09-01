@@ -24,6 +24,9 @@
     .main-box-left{
         max-width: calc(100% - @rightBarWidth);
         transition: max-width 0.3s ease-in-out;
+        display: flex;
+        align-items: center;
+        justify-content: center;
      }
     .main-box-right{
         max-width: @rightBarWidth;
@@ -36,7 +39,23 @@
         background-color: transparent !important;
     }
     .go-top{
+        width: 100px;
+        height: 100px;
         position: fixed;
+        bottom: 0px;
+        left: 0px;
+        z-index: 5;
+        margin-left: -10px;
+        margin-bottom: -10px;
+        transition: margin .3s;
+        img{
+            width: 100px;
+            height: 100px;
+        }
+    }
+    .go-top:hover{
+        margin-left: 0px;
+        margin-bottom: 0px;
     }
 }
 @media (max-width: 768px){
@@ -153,9 +172,17 @@
 #root{
     
 }
+body{
+    font-size: 14px;
+}
 
-
-
+a{
+    color: inherit;
+}
+a:hover{
+    text-decoration: none;
+    color: rgb(114, 114, 114);
+}
 
 /* common  */
 .font-white{
@@ -172,7 +199,16 @@
     top: 0px;
     width: 100%;
     z-index: 2;
+    a:hover{
+        color: white;
+    }
 }
 .right{
     float:right;
+}
+
+.modal-dialog{
+    .btn{
+        
+    }
 }

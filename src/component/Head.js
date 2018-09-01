@@ -5,7 +5,8 @@ import { Button, Container, Row, Col, Nav, NavItem, NavLink, Dropdown,DropdownTo
 } from 'reactstrap';
 import FontAwesome from  'react-fontawesome';
 import { history } from '../store/configureStore';
-import { stopEvent } from '../util/html-util/stopEvent'
+import { stopEvent } from '../util/html-util/stopEvent';
+import { Link } from 'react-router-dom';
  class Head extends Component{
     constructor(){
         super();
@@ -47,9 +48,9 @@ import { stopEvent } from '../util/html-util/stopEvent'
     render(){
         return (
             <Navbar className="fixedable-top" color="dark" dark expand="md">
-            <NavbarBrand href="">
+            <NavbarBrand tag="div">
             <FontAwesome  style={{fontSize: '1.3rem', marginLeft: '8px'}} name="home" size="lg" onClick={this.gohome}/>
-            &nbsp;WDW-React&nbsp;
+            &nbsp;<Link to="/">WDW-React</Link>&nbsp;
                 <FontAwesome className="adapt-visible" style={{fontSize: '1.33rem', marginLeft: '8px'}} name={this.state.orientation} size="lg"
                     onClick={this.closeSideBar}>
                 </FontAwesome>
@@ -60,22 +61,23 @@ import { stopEvent } from '../util/html-util/stopEvent'
             <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
                 <NavItem>
-                    <NavLink href="/components/">
-                    <FontAwesome className="fa-fw" name="shield" size="lg" spin>
+                    <NavLink tag="div"><Link to="/message" style={{fontSize:'14px',fontWeight:"300"}}>
+                    <FontAwesome className="fa-fw" name="calendar-o" >
                     </FontAwesome>
-                    Components
-                </NavLink>
+                    留言板
+                    </Link>
+                    </NavLink>
                 </NavItem>
                 <NavItem>
                     
-                    <NavLink href="https://github.com/reactstrap/reactstrap">
-                    <FontAwesome className="fa-fw" name="github-square" size="lg">
+                    <NavLink href="https://github.com/ape-casear" target="_blank" style={{fontSize:'14px',fontWeight:"300"}}>
+                    <FontAwesome className="fa-fw" name="github-square" >
                     </FontAwesome>
                     GitHub</NavLink>
                 </NavItem>
                 <UncontrolledDropdown nav inNavbar>
-                    <DropdownToggle nav caret>
-                    <FontAwesome className="fa-fw" name="cog" size="lg">
+                    <DropdownToggle nav caret style={{fontSize:'14px',fontWeight:"300"}}>
+                    <FontAwesome className="fa-fw" name="cog" >
                     </FontAwesome>
                     Options
                     </DropdownToggle>
