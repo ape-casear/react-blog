@@ -17,6 +17,7 @@ import { Link } from 'react-router-dom';
         this.toggle = this.toggle.bind(this)
         this.closeSideBar = this.closeSideBar.bind(this)
         this.gohome = this.gohome.bind(this)
+        this.jumpTo = this.jumpTo.bind(this)
     }
     toggle(){
         this.setState({
@@ -34,6 +35,10 @@ import { Link } from 'react-router-dom';
     gohome(e){
         stopEvent(e)
         history.push('/')
+    }
+    jumpTo(e){
+        let path = e.target.dataset.path;
+        history.push('/'+path)
     }
     componentDidMount(){
         window.onresize = ()=>{
@@ -61,7 +66,7 @@ import { Link } from 'react-router-dom';
             <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
                 <NavItem>
-                    <NavLink tag="div"><Link to="/message" style={{fontSize:'14px',fontWeight:"300"}}>
+                    <NavLink tag="div"><Link to="/leavemessage" style={{fontSize:'14px',fontWeight:"300"}}>
                     <FontAwesome className="fa-fw" name="calendar-o" >
                     </FontAwesome>
                     留言板
@@ -75,22 +80,22 @@ import { Link } from 'react-router-dom';
                     </FontAwesome>
                     GitHub</NavLink>
                 </NavItem>
-                <UncontrolledDropdown nav inNavbar>
+                <UncontrolledDropdown nav inNavbar >
                     <DropdownToggle nav caret style={{fontSize:'14px',fontWeight:"300"}}>
                     <FontAwesome className="fa-fw" name="cog" >
                     </FontAwesome>
                     Options
                     </DropdownToggle>
                     <DropdownMenu right>
-                    <DropdownItem>
-                        Option 1
+                    <DropdownItem data-path="cute" onClick={this.jumpTo}>
+                        我很可爱
                     </DropdownItem>
-                    <DropdownItem>
-                        Option 2
+                    <DropdownItem data-path="money" onClick={this.jumpTo}>
+                        给我打钱
                     </DropdownItem>
                     <DropdownItem divider />
-                    <DropdownItem>
-                        Reset
+                    <DropdownItem data-path="login" onClick={this.jumpTo}>
+                        登录
                     </DropdownItem>
                     </DropdownMenu>
                 </UncontrolledDropdown>

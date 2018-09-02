@@ -12,9 +12,12 @@ class ReplyBox extends Component{
     constructor(props) {
         super(props);
         this.state = {
-           textInput:'',
-           checkInput: false,
-           modal: false
+            textInput:'',
+            checkInput: false,
+            modal: false,
+            message: '',
+            show: true,
+            title: '发表评论'
         }
         this.comment = this.comment.bind(this);
         this.bindTextInput = this.bindTextInput.bind(this);
@@ -23,17 +26,53 @@ class ReplyBox extends Component{
         this.goLogin = this.goLogin.bind(this);
     }
     componentDidMount(){
-        
+        if(this.props.title){
+            this.setState({title: this.props.title})
+        }
     }
     comment(){
         if(this.state.checkInput){
 
         }else{
-            if(document.cookie.indexOf('access_wdw_blog') >= 0){
+            if(this.state.textInput == ''){
+                this.setState({
+                    modal: true,
+                    message: '评论不能为空，你是傻子？',
+                    show: false
+                });
+                return;
+            }
+            if(document.cookie.indexOf('ACCESS_TOKEN') >= 0){
                 /* 评论api */
+               
+                this.props.dispatch(httpAction('/comment/addcomment', 'post', 
+                { bloglistid: this.props.bloglistid, comment: this.state.textInput, author: null, parent: this.props.id || 0 }, (res)=>{
+                    /* 判断是回复评论 还是评论文章 */
+                    if(this.props.id){
+                        let new_commentList = this.props.commentList.map(item=>{
+                            if(item.id == this.props.id){
+                                if(item.sub_comment){
+                                    item.sub_comment.push(
+                                        /* 评论返回信息 */
+                                    )
+                                }else{
+                                    item.sub_comment = [{/* 评论返回信息 */}]
+                                }
+                            }
+                            return item;
+                        })
+                        this.props.dispatch({type:'GET_COMMENT_LIST', payload:{commentList: new_commentList}})
+                    }else{
+                        let new_commentList = this.props.commentList
+                        new_commentList.push( /* 评论返回信息 */)
+                        this.props.dispatch({type:'GET_COMMENT_LIST', payload:{commentList: new_commentList}})
+                    }
+                }))
             }else{
                 this.setState({
-                    modal: true
+                    modal: true,
+                    message: '没登陆就想发言？我劝你还是对评论有点敬畏之心(点击游客发言也可)',
+                    show: true
                 });
             }
         }
@@ -64,7 +103,7 @@ class ReplyBox extends Component{
     render(){
         return (
             <div className="reply-box">
-                <p>发表评论</p>
+                <p style={{fontSize:'16px'}}>{this.state.title}</p>
                 <Form>
                     <FormGroup>
                         <Label for="exampleText">评论<small style={{color:"red"}}>*</small></Label>
@@ -83,10 +122,10 @@ class ReplyBox extends Component{
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <ModalHeader toggle={this.toggle}>MESSAGE</ModalHeader>
                     <ModalBody>
-                        没登陆就想发言？我劝你还是对评论有点敬畏之心(点击游客发言也可)
+                        {this.state.message}
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={this.goLogin} size="sm">好的 爷</Button>{' '}
+                        <Button color="primary" style={this.state.show?{}:{display:'none'}} onClick={this.goLogin} size="sm">好的 爷</Button>{' '}
                         <Button color="secondary" onClick={this.toggle} size="sm">去你的</Button>
                     </ModalFooter>
                 </Modal>

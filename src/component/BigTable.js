@@ -8,6 +8,9 @@ import Head from './Head';
 import SideBar from './SideBar'; 
 import MainBox from './MainBox';
 import FontAwesome from  'react-fontawesome';
+import AboutMe from './AboutMe';
+import LeaveMessage from './LeaveMessage';
+
  class BigTable extends Component{
     constructor(props) {
         super(props);
@@ -47,7 +50,9 @@ import FontAwesome from  'react-fontawesome';
                 }
                 </div>
                 <Switch>
-                    <Route path="/" component={MainBox}></Route>
+                    <Route exact path="/" component={MainBox}></Route>
+                    <Route path="/aboutme" name="about" component={AboutMe}></Route>
+                    <Route path="/leavemessage" name="leavemessage" component={LeaveMessage}></Route>
                 </Switch>
             </div>
         )

@@ -23,7 +23,7 @@ class Comments extends Component{
     render(){
         return (
             <Card className="comment-box">
-                <ReplyBox/>
+                <ReplyBox bloglistid={this.props.bloglistid}/>
                 <CommentList bloglistid={this.props.bloglistid}/>
             </Card>
         )

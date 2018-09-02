@@ -7,6 +7,7 @@ import FontAwesome from  'react-fontawesome';
 import UpInfo from './UpInfo';
 import { side_bar } from '../config/layout-config';
 import { history } from '../store/configureStore';
+import { Link } from 'react-router-dom';
  class SideBar extends Component{
     constructor(props) {
         super(props);
@@ -36,7 +37,7 @@ import { history } from '../store/configureStore';
                 <NavItem key={item.id}>
                     <NavLink className={item.link.className} id={item.link.id} href='#'
                     onClick={this.navigateTo} data-route={item.href}>
-                        <FontAwesome className={item.icon.className} data-route={item.href} name={item.icon.name} ></FontAwesome>
+                        <FontAwesome className={item.icon.className} data-route={item.href} name={item.icon.name} ></FontAwesome>&nbsp;&nbsp;
                     {item.name}
                     </NavLink>
                     {
@@ -45,7 +46,7 @@ import { history } from '../store/configureStore';
                                 return (<UncontrolledCollapse toggler={'#'+item.link.id}>
                                     {item.sub_link.map(sub_item=>{
                                         return (<NavLink key={sub_item.id} className={sub_item.className} data-route={sub_item.name} href="#" onClick={this.navigateTo}>
-                                        <FontAwesome className={sub_item.icon.className} data-route={sub_item.name} name={sub_item.icon.name} />
+                                        <FontAwesome className={sub_item.icon.className} data-route={sub_item.name} name={sub_item.icon.name} />&nbsp;&nbsp;
                                         {sub_item.name}</NavLink>)
                                     })}
                                     </UncontrolledCollapse>)
@@ -58,21 +59,17 @@ import { history } from '../store/configureStore';
             <div className={"navi-wrap scrollable side-toggle-"+ this.props.side_toggle }>
               <UpInfo></UpInfo>
               <Nav  vertical>
-                    <NavItem active={true} onClick={()=>this.activeBar(1)}>
-                        <NavLink href="#" >Link</NavLink>
+                    <NavItem>
+                        <Link to="/"><NavLink tag="div" >
+                        <FontAwesome className="fa fa-fw" name="home" />&nbsp;&nbsp;
+                        HOME</NavLink></Link>
                     </NavItem>
-                    <Dropdown direction="up" nav isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                        <DropdownToggle nav caret>
-                        Dropdown
-                        </DropdownToggle>
-                        <DropdownMenu>
-                            <DropdownItem header>Header</DropdownItem>
-                            <DropdownItem disabled>Action</DropdownItem>
-                            <DropdownItem>Another Action</DropdownItem>
-                            <DropdownItem divider />
-                            <DropdownItem>Another Action</DropdownItem>
-                        </DropdownMenu>
-                    </Dropdown>
+                    <NavItem>
+                        <Link to="/aboutme"><NavLink tag="div" >
+                        <FontAwesome className="fa fa-fw" name="user" />&nbsp;&nbsp;
+                        ABOUT ME</NavLink></Link>
+                    </NavItem>
+                    
                     <hr style={{filter : "alpha(opacity=100,finishopacity=0,style=3)", margin: '0.3em auto', width:"80%", borderTop:"1px solid #a6a8b1"}} />
                     
                     {list}

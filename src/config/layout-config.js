@@ -2,13 +2,13 @@ import { webUrl } from './base'
 const side_bar = [
     {
         id: 0, 
-        name: 'link001',
+        name: '我的项目',
         link: {
             id: 'main_item_0',
             className: 'afterRectangular'
         },
         icon: {
-            name: 'external-link-square',
+            name: 'github',
             className: 'super-crazy-colors fa-fw'
         },
         sub_link: [
@@ -43,13 +43,13 @@ const side_bar = [
     },
     {
         id: 1, 
-        name: 'link002',
+        name: '博客分类',
         link: {
             id: 'main_item_1',
             className: 'afterRectangular'
         },
         icon: {
-            name: 'external-link-square',
+            name: 'th-large',
             className: 'super-crazy-colors fa-fw'
         },
         sub_link: [
@@ -84,27 +84,27 @@ const side_bar = [
     },
     {
         id: 2, 
-        name: 'app',
+        name: '知乎每日一爬',
         href: 'app',
         link: {
             id: 'main_item_2',
-            className: 'afterRectangular'
+            className: ''
         },
         icon: {
-            name: 'external-link-square',
+            name: 'files-o',
             className: 'super-crazy-colors fa-fw'
         }
     },
     {
         id: 3, 
-        name: 'link004',
+        name: '小游戏',
         href: 'app',
         link: {
             id: 'main_item_3',
-            className: 'afterRectangular'
+            className: ''
         },
         icon: {
-            name: 'external-link-square',
+            name: 'gamepad',
             className: 'super-crazy-colors fa-fw'
         }
     }

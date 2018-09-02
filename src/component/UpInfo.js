@@ -21,13 +21,15 @@ class UpInfo extends Component{
                  <Card style={{borderRadius:"0px"}}>
                     <CardBody>
                         <CardTitle>Ape-Caesar</CardTitle>
-                        <CardSubtitle>天津大学</CardSubtitle>
+                        <CardSubtitle>
+                            <FontAwesome className="fa fa-fw" name="graduation-cap"/>
+                            天津大学</CardSubtitle>
                     </CardBody>
                     <img width="100%" src={require('../images/static_imgs/pixiv001.jpg')} alt="Card image cap" />
                     <CardBody style={{padding: '0.5rem'}}>
                         <CardText>welcome to my blog</CardText>
-                        <CardLink href="#">Card Link</CardLink>
-                        <CardLink href="#">Another Link</CardLink>
+                        <CardLink href="https://www.bilibili.com" target="_blank">BiliBili</CardLink>
+                        <CardLink href="http://www.acfun.cn" target="_blank">AcFun</CardLink>
                     </CardBody>
                 </Card>
             </div>
