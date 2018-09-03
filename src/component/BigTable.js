@@ -50,9 +50,9 @@ import LeaveMessage from './LeaveMessage';
                 }
                 </div>
                 <Switch>
-                    <Route exact path="/" component={MainBox}></Route>
                     <Route path="/aboutme" name="about" component={AboutMe}></Route>
                     <Route path="/leavemessage" name="leavemessage" component={LeaveMessage}></Route>
+                    <Route path="/" component={MainBox}></Route>
                 </Switch>
             </div>
         )

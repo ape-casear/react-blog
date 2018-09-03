@@ -69,7 +69,7 @@ class CommentList extends Component{
                         <Media key={item.id}>
                             <Media left tag="div">
                                 <Link to={"/user/"+item.author}>
-                                <Media object src="http://www.weidongwei.com:88/img/expressImg/0104.jpg" alt="image" />
+                                <Media object src="http://120.79.233.201:88/img/expressImg/0104.jpg" alt="image" />
                                 </Link>
                             </Media>
                             <Media body>
@@ -85,7 +85,7 @@ class CommentList extends Component{
                                     return (<Media key={index}>
                                         <Media left tag="div">
                                             <Link to={"/user/"+sub_item.author}>
-                                            <Media object src="http://www.weidongwei.com:88/img/expressImg/0104.jpg" alt="image" />
+                                            <Media object src="http://120.79.233.201:88/img/expressImg/0104.jpg" alt="image" />
                                             </Link>
                                         </Media>
                                         <Media body>

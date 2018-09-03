@@ -22,6 +22,7 @@ import Comments from './Comments';
        
     }
     componentDidMount(){
+        console.log('BlogContent did mount')
         let id = this.props.match.params.blog;
         let { title } = qs.parse(this.props.location.search.replace('?',''))
         this.setState({

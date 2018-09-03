@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, Switch } from 'react-router';
 import './index.css';
-import App from './App';
+import Login from './component/login/Login';
 import BigTable from './component/BigTable'
 import registerServiceWorker from './registerServiceWorker';
 import { configureStore, history }  from './store/configureStore';
@@ -16,8 +16,8 @@ ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
             <Switch>
-                <Route path="/login" component={App}/>
-                <Route  path="/" component={BigTable}/>
+                <Route path="/login" component={Login}/>
+                <Route path="/" component={BigTable}/>
             </Switch>
         </Router>
     </Provider>, 

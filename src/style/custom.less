@@ -100,7 +100,7 @@
     position: fixed;
     top: 0px;
     left: 0px;
-    padding-top: 56px;
+    padding-top: 49px;
     z-index: 1;
     height: 100%;
     background-color: #3a3f51;
@@ -137,7 +137,7 @@
     height: 100%;
     left: 0px;
     top: 0px;
-    z-index: 0;
+    z-index: -1;
 }
 .side-toggle-off{
     margin-left: -160px; 
@@ -173,7 +173,7 @@
 #root{
     
 }
-body{
+html{
     font-size: 14px;
 }
 
@@ -183,6 +183,28 @@ a{
 a:hover{
     text-decoration: none;
     color: rgb(114, 114, 114);
+}
+/* Head  的样式 */
+.fixedable-top{
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 2;
+    a:hover{
+        color: white;
+    }
+}
+.loading-progress{
+    position: fixed;
+    top: 49px;
+    width: 100%;
+    z-index: 2;
+    height: 3px;
+    border-radius: 0px;
+    .progress-bar{
+        background-color: #5d637a;
+        transition: width .3s ;
+    }
 }
 
 /* common  */
@@ -194,15 +216,6 @@ a:hover{
 }
 .scrollable{
     overflow: scroll;
-}
-.fixedable-top{
-    position: fixed;
-    top: 0px;
-    width: 100%;
-    z-index: 2;
-    a:hover{
-        color: white;
-    }
 }
 .right{
     float:right;

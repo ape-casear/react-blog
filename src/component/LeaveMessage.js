@@ -21,8 +21,10 @@ import ReplyBox from './main/comment/ReplyBox';
     render(){
         return (
             <div className="main-box">
-                <CommentList bloglistid="15"/>
-                <ReplyBox bloglistid="15"/>
+                <Card className="l-message">
+                    <CommentList bloglistid="15"/>
+                    <ReplyBox bloglistid="15"/>
+                </Card>
             </div>
         )
     }

@@ -14,7 +14,7 @@ export default  handleActions(
             console.log(state)
             return { ...state, ...action.payload }
         },
-        'load'(state, action){
+        'LOAD'(state, action){
             return { ...state, ...action.payload }
         }
     },

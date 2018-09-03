@@ -7,6 +7,7 @@ import classnames from 'classnames';
 import FontAwesome from  'react-fontawesome';
 import httpAction from '../../util/ajax/httpAction';
 import qs from 'qs';
+import { apiUrl } from '../../config/base'
  class RightBar extends Component{
     constructor(props) {
         super(props);
@@ -55,25 +56,25 @@ import qs from 'qs';
         this.setState({
             activeContent : [
                 { id: 0, name: '热门', contents: [
-                    {avatar: 'http://www.weidongwei.com:88/img/expressImg/0101.jpg', title: '搅拌摩擦焊的热熔机理探究', comments: 99, views: 999 },
-                    {avatar: 'http://www.weidongwei.com:88/img/expressImg/0102.jpg', title: '搅拌摩擦焊的热熔机理探究', comments: 99, views: 999 },
-                    {avatar: 'http://www.weidongwei.com:88/img/expressImg/0103.jpg', title: '搅拌摩擦焊的热熔机理探究', comments: 99, views: 999 },
-                    {avatar: 'http://www.weidongwei.com:88/img/expressImg/0104.jpg', title: '搅拌摩擦焊的热熔机理探究', comments: 99, views: 999 },
-                    {avatar: 'http://www.weidongwei.com:88/img/expressImg/0201.jpg', title: '搅拌摩擦焊的热熔机理探究', comments: 99, views: 999 },
+                    {avatar: apiUrl+'/img/expressImg/0101.jpg', title: '搅拌摩擦焊的热熔机理探究', comments: 99, views: 999 },
+                    {avatar: apiUrl+'/img/expressImg/0102.jpg', title: '搅拌摩擦焊的热熔机理探究', comments: 99, views: 999 },
+                    {avatar: apiUrl+'/img/expressImg/0103.jpg', title: '搅拌摩擦焊的热熔机理探究', comments: 99, views: 999 },
+                    {avatar: apiUrl+'/img/expressImg/0104.jpg', title: '搅拌摩擦焊的热熔机理探究', comments: 99, views: 999 },
+                    {avatar: apiUrl+'/img/expressImg/0201.jpg', title: '搅拌摩擦焊的热熔机理探究', comments: 99, views: 999 },
                 ]},
                 { id: 1, name: '随机', contents: [
-                    {avatar: 'http://www.weidongwei.com:88/img/expressImg/0101.jpg', title: '搅拌摩擦焊的热熔机理探究', comments: 99, views: 999 },
-                    {avatar: 'http://www.weidongwei.com:88/img/expressImg/0101.jpg', title: '搅拌摩擦焊的热熔机理探究', comments: 99, views: 999 },
-                    {avatar: 'http://www.weidongwei.com:88/img/expressImg/0101.jpg', title: '搅拌摩擦焊的热熔机理探究', comments: 99, views: 999 },
-                    {avatar: 'http://www.weidongwei.com:88/img/expressImg/0101.jpg', title: '搅拌摩擦焊的热熔机理探究', comments: 99, views: 999 },
-                    {avatar: 'http://www.weidongwei.com:88/img/expressImg/0101.jpg', title: '搅拌摩擦焊的热熔机理探究', comments: 99, views: 999 },
+                    {avatar: apiUrl+'/img/expressImg/0101.jpg', title: '搅拌摩擦焊的热熔机理探究', comments: 99, views: 999 },
+                    {avatar: apiUrl+'/img/expressImg/0101.jpg', title: '搅拌摩擦焊的热熔机理探究', comments: 99, views: 999 },
+                    {avatar: apiUrl+'/img/expressImg/0101.jpg', title: '搅拌摩擦焊的热熔机理探究', comments: 99, views: 999 },
+                    {avatar: apiUrl+'/img/expressImg/0101.jpg', title: '搅拌摩擦焊的热熔机理探究', comments: 99, views: 999 },
+                    {avatar: apiUrl+'/img/expressImg/0101.jpg', title: '搅拌摩擦焊的热熔机理探究', comments: 99, views: 999 },
                 ]},
                 { id: 2, name: '最新评论', contents: [
-                    {avatar: 'http://www.weidongwei.com:88/img/expressImg/0101.jpg', username: 'KING', comment: 'up主你的博客好好看' },
-                    {avatar: 'http://www.weidongwei.com:88/img/expressImg/0101.jpg', username: 'KING', comment: 'up主你的博客好好看' },
-                    {avatar: 'http://www.weidongwei.com:88/img/expressImg/0101.jpg', username: 'KING', comment: 'up主你的博客好好看' },
-                    {avatar: 'http://www.weidongwei.com:88/img/expressImg/0101.jpg', username: 'KING', comment: 'up主你的博客好好看' },
-                    {avatar: 'http://www.weidongwei.com:88/img/expressImg/0101.jpg', username: 'KING', comment: 'up主你的博客好好看' },
+                    {avatar: apiUrl+'/img/expressImg/0101.jpg', username: 'KING', comment: 'up主你的博客好好看' },
+                    {avatar: apiUrl+'/img/expressImg/0101.jpg', username: 'KING', comment: 'up主你的博客好好看' },
+                    {avatar: apiUrl+'/img/expressImg/0101.jpg', username: 'KING', comment: 'up主你的博客好好看' },
+                    {avatar: apiUrl+'/img/expressImg/0101.jpg', username: 'KING', comment: 'up主你的博客好好看' },
+                    {avatar: apiUrl+'/img/expressImg/0101.jpg', username: 'KING', comment: 'up主你的博客好好看' },
                 ]},
             ],
             webinfo: [

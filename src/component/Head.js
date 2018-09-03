@@ -1,27 +1,40 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Container, Row, Col, Nav, NavItem, NavLink, Dropdown,DropdownToggle, DropdownMenu,DropdownItem,
+import { Button, Container, Row, Progress, Nav, NavItem, NavLink, Dropdown,DropdownToggle, DropdownMenu,DropdownItem,
     Navbar,NavbarBrand,NavbarToggler,Collapse,UncontrolledDropdown
 } from 'reactstrap';
 import FontAwesome from  'react-fontawesome';
 import { history } from '../store/configureStore';
 import { stopEvent } from '../util/html-util/stopEvent';
 import { Link } from 'react-router-dom';
- class Head extends Component{
+const timeout = ms =>new Promise(res=>setTimeout(res, ms))
+class Head extends Component{
     constructor(){
         super();
         this.state = {
             isOpen : false,
-            orientation: 'expand'
+            orientation: 'expand',
+            progress: 0,
         }
         this.toggle = this.toggle.bind(this)
         this.closeSideBar = this.closeSideBar.bind(this)
         this.gohome = this.gohome.bind(this)
         this.jumpTo = this.jumpTo.bind(this)
+        this.loading = this.loading.bind(this)
+        this.close = this.close.bind(this)
     }
-    toggle(){
+    toggle(e){
+        console.log('toggle')
+        console.log(e.target)
         this.setState({
             isOpen: !this.state.isOpen
+        })
+    }
+    close(e){
+        console.log('close')
+        console.log(e.target)
+        this.setState({
+            isOpen: false
         })
     }
     closeSideBar(e){
@@ -40,6 +53,17 @@ import { Link } from 'react-router-dom';
         let path = e.target.dataset.path;
         history.push('/'+path)
     }
+    async loading(){
+        
+        while(this.state.progress < 70){
+            await timeout(50)
+            if(!this.props.loading){
+                break
+            }
+            this.setState({progress: ++this.state.progress})
+        }
+    }
+
     componentDidMount(){
         window.onresize = ()=>{
             if(window.innerWidth > 768){
@@ -50,9 +74,22 @@ import { Link } from 'react-router-dom';
             this.props.dispatch({type: 'windowSize', payload: { innerWidth: window.innerWidth ,innerHeight: window.innerHeight}})
         };
     }
+    async componentWillReceiveProps(nextProps){
+        if(this.props.loading == false && nextProps.loading == true){
+            this.loading()
+        }
+        if(this.props.loading == true && nextProps.loading == false){
+            this.setState({progress: 100})
+            await timeout(200)
+            this.setState({progress: 0})
+        }
+    }
     render(){
+        
+        
         return (
-            <Navbar className="fixedable-top" color="dark" dark expand="md">
+            <div >
+            <Navbar className="fixedable-top" color="dark" dark expand="md" onBlur={this.close}>
             <NavbarBrand tag="div">
             <FontAwesome  style={{fontSize: '1.3rem', marginLeft: '8px'}} name="home" size="lg" onClick={this.gohome}/>
             &nbsp;<Link to="/">WDW-React</Link>&nbsp;
@@ -63,19 +100,20 @@ import { Link } from 'react-router-dom';
             
          
             <NavbarToggler onClick={this.toggle} />
-            <Collapse isOpen={this.state.isOpen} navbar>
-                <Nav className="ml-auto" navbar>
-                <NavItem>
-                    <NavLink tag="div"><Link to="/leavemessage" style={{fontSize:'14px',fontWeight:"300"}}>
+            <Collapse isOpen={this.state.isOpen} navbar >
+                <Nav className="ml-auto" navbar >
+                <NavItem >
+                    <NavLink tag="div"><Link to="/leavemessage" style={{fontSize:'14px',fontWeight:"300"}}
+                    >
                     <FontAwesome className="fa-fw" name="calendar-o" >
                     </FontAwesome>
                     留言板
                     </Link>
                     </NavLink>
                 </NavItem>
-                <NavItem>
-                    
-                    <NavLink href="https://github.com/ape-casear" target="_blank" style={{fontSize:'14px',fontWeight:"300"}}>
+                <NavItem >
+                    <NavLink href="https://github.com/ape-casear" target="_blank" style={{fontSize:'14px',fontWeight:"300"}}
+                    >
                     <FontAwesome className="fa-fw" name="github-square" >
                     </FontAwesome>
                     GitHub</NavLink>
@@ -102,7 +140,8 @@ import { Link } from 'react-router-dom';
                 </Nav>
             </Collapse>
             </Navbar>
-            
+            <Progress className="loading-progress" style={(this.state.progress==0)?{display:'none'}:{}} value={this.state.progress} />
+            </div>
         )
     }
  }
@@ -113,7 +152,8 @@ import { Link } from 'react-router-dom';
     return {
         color: color.color,
         side_toggle: layout.sidebar,
-        window: window
+        loading: layout.load,
+        window: window,
     }
 }   
 
