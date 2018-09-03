@@ -89,7 +89,7 @@ class Head extends Component{
         
         return (
             <div >
-            <Navbar className="fixedable-top" color="dark" dark expand="md" onBlur={this.close}>
+            <Navbar className="fixedable-top" color="dark" dark expand="md" >
             <NavbarBrand tag="div">
             <FontAwesome  style={{fontSize: '1.3rem', marginLeft: '8px'}} name="home" size="lg" onClick={this.gohome}/>
             &nbsp;<Link to="/">WDW-React</Link>&nbsp;
@@ -102,7 +102,7 @@ class Head extends Component{
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar >
                 <Nav className="ml-auto" navbar >
-                <NavItem >
+                <NavItem onClick={this.close}>
                     <NavLink tag="div"><Link to="/leavemessage" style={{fontSize:'14px',fontWeight:"300"}}
                     >
                     <FontAwesome className="fa-fw" name="calendar-o" >

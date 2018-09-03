@@ -18,7 +18,9 @@ import FontAwesome from  'react-fontawesome';
     }
     render(){
         return (
-            <div className="about-me main-box">
+            <div className="about-me main-box"
+            style={(this.props.window.innerWidth < 768 && this.props.side_toggle == 'on')?{height:(this.props.window.innerHeight-49)+"px", overflow:'hidden'}:{}}
+            >
               <Card className="" style={{backgroundColor: "#fff"}}>
               <Jumbotron style={{marginBottom:"0px", paddingBottom: "2rem", backgroundColor: "#fff"}}>
                     <h1 className="display-3">Hello, there!</h1>
@@ -103,7 +105,8 @@ import FontAwesome from  'react-fontawesome';
     
     
     return {
-        
+        window: state.window,
+        side_toggle: state.layout.sidebar
         
     }
 }   

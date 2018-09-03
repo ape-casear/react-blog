@@ -17,6 +17,8 @@ import { Link } from 'react-router-dom';
         }
         this.toggle = this.toggle.bind(this);
         this.navigateTo = this.navigateTo.bind(this);
+        this.closeSideBarForce = this.closeSideBarForce.bind(this)
+        this.onBlur = this.onBlur.bind(this)
     }
     toggle() {
         this.setState({
@@ -28,6 +30,17 @@ import { Link } from 'react-router-dom';
             console.log('navigateTo')
             history.push('/'+ e.target.dataset.route)
         }
+        if(window.innerWidth < 768){
+            this.props.dispatch({type: 'switch sideOutIn', payload: { sidebar: 'off' }})
+        }
+    }
+    closeSideBarForce(){
+        if(window.innerWidth < 768){
+            this.props.dispatch({type: 'switch sideOutIn', payload: { sidebar: 'off' }})
+        }
+    }
+    onBlur(){
+        console.log('blur')
     }
     render(){
         console.log(this.props.side_toggle)
@@ -36,7 +49,7 @@ import { Link } from 'react-router-dom';
             return (
                 <NavItem key={item.id}>
                     <NavLink className={item.link.className} id={item.link.id} href='#'
-                    onClick={this.navigateTo} data-route={item.href}>
+                    data-route={item.href}>
                         <FontAwesome className={item.icon.className} data-route={item.href} name={item.icon.name} ></FontAwesome>&nbsp;&nbsp;
                     {item.name}
                     </NavLink>
@@ -56,15 +69,15 @@ import { Link } from 'react-router-dom';
             )
         })
         return (
-            <div className={"navi-wrap scrollable side-toggle-"+ this.props.side_toggle }>
+            <div className={"navi-wrap scrollable side-toggle-"+ this.props.side_toggle } onBlur={this.onBlur}>
               <UpInfo></UpInfo>
               <Nav  vertical>
-                    <NavItem>
+                    <NavItem onClick={this.closeSideBarForce}>
                         <Link to="/"><NavLink tag="div" >
                         <FontAwesome className="fa fa-fw" name="home" />&nbsp;&nbsp;
                         HOME</NavLink></Link>
                     </NavItem>
-                    <NavItem>
+                    <NavItem  onClick={this.closeSideBarForce}>
                         <Link to="/aboutme"><NavLink tag="div" >
                         <FontAwesome className="fa fa-fw" name="user" />&nbsp;&nbsp;
                         ABOUT ME</NavLink></Link>
@@ -74,10 +87,10 @@ import { Link } from 'react-router-dom';
                     
                     {list}
                     <NavItem >
-                        <NavLink href="#">Another Link</NavLink>
+                        <NavLink href="#"  onClick={this.closeSideBarForce}>Another Link</NavLink>
                     </NavItem>
                     <NavItem >
-                        <NavLink  href="#">Disabled Link</NavLink>
+                        <NavLink  href="#"  onClick={this.closeSideBarForce}>Disabled Link</NavLink>
                     </NavItem>
                 </Nav>
             </div>

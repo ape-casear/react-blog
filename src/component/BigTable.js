@@ -10,7 +10,7 @@ import MainBox from './MainBox';
 import FontAwesome from  'react-fontawesome';
 import AboutMe from './AboutMe';
 import LeaveMessage from './LeaveMessage';
-
+import {stopEvent} from '../util/html-util/stopEvent'
  class BigTable extends Component{
     constructor(props) {
         super(props);
@@ -19,12 +19,17 @@ import LeaveMessage from './LeaveMessage';
         }
         this.click=this.click.bind(this)
         this.goTop=this.goTop.bind(this)
+        this.stop=this.stop.bind(this)
     }
     click(e){
         
     }
     goTop(){
         window.scrollTo(0,0)
+    }
+    stop(e){
+        console.log('mask stop')
+        stopEvent(e)
     }
     render(){
         // this.props.window.innerHeight
@@ -49,10 +54,25 @@ import LeaveMessage from './LeaveMessage';
                 })()
                 }
                 </div>
+                {(()=>{
+                    if(this.props.window.innerWidth < 768 && this.props.side_toggle == 'on' ){
+                        return (
+                            <div className="mask" 
+                            /*  onTouchMove={this.stop}
+                            onTouchStart={this.stop}
+                            onTouchEnd={this.stop}
+                            onScroll={this.stop} */
+                            style={this.props.side_toggle == 'on'?{height: this.props.window.innerHeight, width: this.props.window.innerWidth}:{display:'none'}}></div>
+                        )
+                    }
+                    })()
+                } 
                 <Switch>
                     <Route path="/aboutme" name="about" component={AboutMe}></Route>
                     <Route path="/leavemessage" name="leavemessage" component={LeaveMessage}></Route>
-                    <Route path="/" component={MainBox}></Route>
+                    <Route path="/" component={MainBox}
+                   
+                    ></Route>
                 </Switch>
             </div>
         )
@@ -63,7 +83,7 @@ import LeaveMessage from './LeaveMessage';
     
     return {
         window,
-        layout
+        side_toggle: layout.sidebar,
     }
 }   
  export default connect(mapStateToProps)(BigTable)

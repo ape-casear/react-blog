@@ -20,7 +20,9 @@ import ReplyBox from './main/comment/ReplyBox';
     }
     render(){
         return (
-            <div className="main-box">
+            <div className="main-box"
+            style={(this.props.window.innerWidth < 768 && this.props.side_toggle == 'on')?{height:(this.props.window.innerHeight-49)+"px", overflow:'hidden'}:{}}
+            >
                 <Card className="l-message">
                     <CommentList bloglistid="15"/>
                     <ReplyBox bloglistid="15"/>
@@ -33,7 +35,8 @@ import ReplyBox from './main/comment/ReplyBox';
     
     
     return {
-        
+        window: state.window,
+        side_toggle: state.layout.sidebar
         
     }
 }   

@@ -20,7 +20,9 @@ import BlogContent from './main/BlogContent';
     }
     render(){
         return (
-            <div className="main-box">
+            <div className="main-box" 
+            style={(this.props.window.innerWidth < 768 && this.props.side_toggle == 'on')?{height:(this.props.window.innerHeight-49)+"px", overflow:'hidden'}:{}}
+            >
                 <Row >
                     <Col className="main-box-left" xs="12" >
                         <Switch>
@@ -40,8 +42,8 @@ import BlogContent from './main/BlogContent';
     
     
     return {
-        
-        
+        window: state.window,
+        side_toggle: state.layout.sidebar
     }
 }   
  export default connect(mapStateToProps)(MainBox)
