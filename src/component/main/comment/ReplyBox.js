@@ -112,7 +112,7 @@ class ReplyBox extends Component{
                 <p style={{fontSize:'16px'}}>{this.state.title}</p>
                 <Form>
                     <FormGroup>
-                        <Label for="exampleText">评论<small style={{color:"red"}}>*</small></Label>
+                        <Label for="exampleText">{this.props.mode||'评论'}<small style={{color:"red"}}>*</small></Label>
                         <Input type="textarea" name="text" id="exampleText" placeholder="公子～来玩儿啊～"
                             value={this.state.textInput} onChange={this.bindTextInput}/>
                     </FormGroup>

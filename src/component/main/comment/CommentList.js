@@ -63,7 +63,7 @@ class CommentList extends Component{
     render(){
         return (
             <div className="comment-list">
-                <p style={{fontSize:'16px'}}>{this.state.comment_length}条评论</p>
+                <p style={{fontSize:'16px'}}>{this.state.comment_length}条{this.props.mode||'评论'}</p>
                 <hr style={{filter : "alpha(opacity=100,finishopacity=0,style=3)", margin: '0.3rem auto', width:"100%", borderTop:"1px solid #aaa"}} />
                 {this.props.commentList.map((item,index)=>{
                     return (

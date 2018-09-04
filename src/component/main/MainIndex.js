@@ -15,6 +15,7 @@ import { history } from '../../store/configureStore';
         this.toBlog = this.toBlog.bind();
     }
     componentDidMount(){
+        window.scrollTo(0,0)
         this.props.dispatch(httpAction('/bloglist/0','get',null, (res)=>{
             this.props.dispatch({type:'GET_BLOG_LIST_MAIN', payload: {blogList: res.data.data.bloglist} })
         }))
@@ -32,10 +33,10 @@ import { history } from '../../store/configureStore';
                     data-title={item.title} style={
                     {backgroundImage: "url(" + ((item.img_url)?item.img_url: require('../../images/static_imgs/webPic.jpg')) + ")" }}/>
                     <CardBody className="card-body">
-                        <CardTitle data-id={item.id} onClick={this.toBlog}
+                        <CardTitle tag="h4" data-id={item.id} onClick={this.toBlog}
                         data-title={item.title}>{item.title}</CardTitle>
                         <CardSubtitle>Card subtitle</CardSubtitle>
-                        <hr style={{filter : "alpha(opacity=100,finishopacity=0,style=3)", margin: '0.5em auto', width:"100%", borderTop:"1px solid #ccc"}} />
+                        <hr style={{filter : "alpha(opacity=100,finishopacity=0,style=3)", margin: '0.5em auto', width:"100%"}} />
                         <Nav style={{fontSize: '14px', fontWeight: '300'}}>
                             <NavItem style={{marginRight: "5px"}}>
                             <FontAwesome className="fa-fw" name="user" />&nbsp;{item.author}

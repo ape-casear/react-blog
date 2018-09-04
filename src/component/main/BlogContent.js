@@ -23,6 +23,7 @@ import BreadcrumbCus from './comment/BreadcrumbCus';
        
     }
     componentDidMount(){
+        window.scrollTo(0,0)
         console.log('BlogContent did mount')
         let id = this.props.match.params.blog;
         let { title } = qs.parse(this.props.location.search.replace('?',''))

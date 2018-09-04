@@ -37,8 +37,8 @@ import saying from '../config/saying';
                         )
                     })}
                     <div style={{margin: '1rem 0px'}}></div>
-                    <CommentList bloglistid="15"/>
-                    <ReplyBox bloglistid="15"/>
+                    <CommentList bloglistid="15" mode="留言"/>
+                    <ReplyBox bloglistid="15" mode="留言" title="留下足迹"/>
                 </Card>
                 </div>
             </div>
