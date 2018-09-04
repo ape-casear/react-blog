@@ -30,21 +30,23 @@ class ReplyBox extends Component{
             this.setState({title: this.props.title})
         }
     }
+    /* 提交评论 */
     comment(){
+        if(this.state.textInput == ''){
+            this.setState({
+                modal: true,
+                message: '评论不能为空，你是傻子？',
+                show: false
+            });
+            return;
+        }
+        /* 匿名评论 */
         if(this.state.checkInput){
 
+        /* 正常评论 */
         }else{
-            if(this.state.textInput == ''){
-                this.setState({
-                    modal: true,
-                    message: '评论不能为空，你是傻子？',
-                    show: false
-                });
-                return;
-            }
             if(document.cookie.indexOf('ACCESS_TOKEN') >= 0){
                 /* 评论api */
-               
                 this.props.dispatch(httpAction('/comment/addcomment', 'post', 
                 { bloglistid: this.props.bloglistid, comment: this.state.textInput, author: null, parent: this.props.id || 0 }, (res)=>{
                     /* 判断是回复评论 还是评论文章 */
@@ -79,21 +81,25 @@ class ReplyBox extends Component{
 
         console.log(this.state.checkInput)
     }
+    /* 输入绑定 */
     bindTextInput(e){
         this.setState({
             textInput: e.target.value
         })
     }
+    /* 输入绑定 */
     bindCheckInput(e){
         this.setState({
             checkInput: !this.state.checkInput
         })
     }
+    /* 弹窗控制 */
     toggle() {
         this.setState({
           modal: !this.state.modal
         });
     }
+    /* 前往登录页 */
     goLogin() {
         this.setState({
           modal: !this.state.modal

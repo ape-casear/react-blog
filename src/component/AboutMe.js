@@ -56,6 +56,10 @@ import FontAwesome from  'react-fontawesome';
                     <FontAwesome name="tag"/>
                     90后
                     </span>
+                    <span className="head">
+                    <FontAwesome name="tag"/>
+                    LOL 炉石传说
+                    </span>
                 </div>
                 <div className="introduce-box row">
                     

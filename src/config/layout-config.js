@@ -85,7 +85,7 @@ const side_bar = [
     {
         id: 2, 
         name: '知乎每日一爬',
-        href: 'app',
+        href: 'zhihu',
         link: {
             id: 'main_item_2',
             className: ''
@@ -98,7 +98,7 @@ const side_bar = [
     {
         id: 3, 
         name: '小游戏',
-        href: 'app',
+        href: 'game',
         link: {
             id: 'main_item_3',
             className: ''

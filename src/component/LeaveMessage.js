@@ -7,6 +7,7 @@ import { Card, Container, Row, Col, Nav, NavItem, NavLink, Dropdown,ListGroupIte
 import FontAwesome from  'react-fontawesome';
 import CommentList from './main/comment/CommentList';
 import ReplyBox from './main/comment/ReplyBox';
+import saying from '../config/saying';
  class LeaveMessage extends Component{
     constructor(props) {
         super(props);
@@ -20,13 +21,26 @@ import ReplyBox from './main/comment/ReplyBox';
     }
     render(){
         return (
-            <div className="main-box"
+            <div className="main-box l-message-box"
             style={(this.props.window.innerWidth < 768 && this.props.side_toggle == 'on')?{height:(this.props.window.innerHeight-49)+"px", overflow:'hidden'}:{}}
             >
+                <div className="l-message-small-box" style={{}}>
+                <img src={require('../images/static_imgs/pixiv004.jpg')} style={{width: '100%'}}></img>
                 <Card className="l-message">
+                    <p style={{fontSize:'16px'}}>想说啥就<strong color="#333">说</strong>吧!</p>
+                    {saying.map((item,index)=>{
+                        return (
+                            <div key={index} style={{borderBottom: '1px dotted #555',paddingBottom:'0.2rem'}}>
+                                <p style={{marginBottom: '0px'}}>{item.saying}</p>
+                                <div style={{textAlign: 'right'}}>{item.name}</div>
+                            </div>
+                        )
+                    })}
+                    <div style={{margin: '1rem 0px'}}></div>
                     <CommentList bloglistid="15"/>
                     <ReplyBox bloglistid="15"/>
                 </Card>
+                </div>
             </div>
         )
     }

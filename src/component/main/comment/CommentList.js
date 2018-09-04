@@ -12,14 +12,15 @@ class CommentList extends Component{
     constructor(props) {
         super(props);
         this.state = {
-           comment_length: 0,
-           replyIndex: -1
+           comment_length: 0,       // 评论数
+           replyIndex: -1           // 用于指定打开哪条评论回复框   -1 为没有
         }
         this.reply = this.reply.bind(this)
         this.cancel = this.cancel.bind(this)
     }
     componentDidMount(){
         let id = this.props.bloglistid;
+        // 评论list 由store控制
         this.props.dispatch(httpAction('/comment/'+id, 'get', null, (res)=>{
             this.setState({
                 comment_length: res.data.data.length

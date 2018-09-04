@@ -96,9 +96,9 @@ class Login extends Component{
         }
         let shaObj = new jsSHA("SHA-256","TEXT");
         shaObj.update(this.state.passwordInput+'wdwblog')
-        console.log(this.state.passwordInput+'wdwblog')
+        //console.log(this.state.passwordInput+'wdwblog')
         let password = shaObj.getHash("HEX");
-        console.log(password)
+        //console.log(password)
 
         if(this.state.mode == 0){
             this.props.dispatch(httpAction('/user/login', 'post', {author: this.state.emailInput, password }, (res)=>{

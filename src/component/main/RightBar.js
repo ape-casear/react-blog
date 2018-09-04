@@ -50,39 +50,22 @@ import { apiUrl } from '../../config/base'
         }
     }
     componentDidMount(){
-        /* this.props.dispatch(httpAction('/complex/side-bar', 'get', null, (res)=>{
-            this.props.dispatch({type: 'GET_SIDE_BAR_CONTENT', payload: {side_bar_content: res.data.data}})
-        })) */
-        this.setState({
-            activeContent : [
-                { id: 0, name: '热门', contents: [
-                    {avatar: apiUrl+'/img/expressImg/0101.jpg', title: '搅拌摩擦焊的热熔机理探究', comments: 99, views: 999 },
-                    {avatar: apiUrl+'/img/expressImg/0102.jpg', title: '搅拌摩擦焊的热熔机理探究', comments: 99, views: 999 },
-                    {avatar: apiUrl+'/img/expressImg/0103.jpg', title: '搅拌摩擦焊的热熔机理探究', comments: 99, views: 999 },
-                    {avatar: apiUrl+'/img/expressImg/0104.jpg', title: '搅拌摩擦焊的热熔机理探究', comments: 99, views: 999 },
-                    {avatar: apiUrl+'/img/expressImg/0201.jpg', title: '搅拌摩擦焊的热熔机理探究', comments: 99, views: 999 },
-                ]},
-                { id: 1, name: '随机', contents: [
-                    {avatar: apiUrl+'/img/expressImg/0101.jpg', title: '搅拌摩擦焊的热熔机理探究', comments: 99, views: 999 },
-                    {avatar: apiUrl+'/img/expressImg/0101.jpg', title: '搅拌摩擦焊的热熔机理探究', comments: 99, views: 999 },
-                    {avatar: apiUrl+'/img/expressImg/0101.jpg', title: '搅拌摩擦焊的热熔机理探究', comments: 99, views: 999 },
-                    {avatar: apiUrl+'/img/expressImg/0101.jpg', title: '搅拌摩擦焊的热熔机理探究', comments: 99, views: 999 },
-                    {avatar: apiUrl+'/img/expressImg/0101.jpg', title: '搅拌摩擦焊的热熔机理探究', comments: 99, views: 999 },
-                ]},
-                { id: 2, name: '最新评论', contents: [
-                    {avatar: apiUrl+'/img/expressImg/0101.jpg', username: 'KING', comment: 'up主你的博客好好看' },
-                    {avatar: apiUrl+'/img/expressImg/0101.jpg', username: 'KING', comment: 'up主你的博客好好看' },
-                    {avatar: apiUrl+'/img/expressImg/0101.jpg', username: 'KING', comment: 'up主你的博客好好看' },
-                    {avatar: apiUrl+'/img/expressImg/0101.jpg', username: 'KING', comment: 'up主你的博客好好看' },
-                    {avatar: apiUrl+'/img/expressImg/0101.jpg', username: 'KING', comment: 'up主你的博客好好看' },
-                ]},
-            ],
-            webinfo: [
-                {name:'文章篇数',icon_name:'file-text-o', count:9},
-                {name:'评论数',icon_name:'comments-o', count:99},
-                {name:'访问数',icon_name:'hand-pointer-o', count:999},
-            ]
-        })
+        this.props.dispatch(httpAction('/webinfo', 'get', null, (res)=>{
+            this.props.dispatch({type: 'GET_SIDE_BAR_CONTENT', payload: {side_bar_content: res.data}})
+
+            this.setState({
+                activeContent : [
+                    { id: 0, name: '热门', contents: res.data.data_hot.bloglist},
+                    { id: 1, name: '随机', contents: res.data.data_time.bloglist},
+                    { id: 2, name: '最新评论', contents: res.data.latest_comment},
+                ],
+                webinfo: [
+                    {name:'文章篇数',icon_name:'file-text-o', count: res.data.blog_count},
+                    {name:'评论数',icon_name:'comments-o', count: res.data.total_comment},
+                    {name:'访问数',icon_name:'hand-pointer-o', count: res.data.visit_count},
+                ]
+            })
+        }))
         window.onscroll = ()=>{
             if(window.scrollY > 800){
                 !this.props.goTop&&this.props.dispatch({type: 'TOGGLE_GO_TOP', payload: {goTop: true}})
@@ -107,7 +90,7 @@ import { apiUrl } from '../../config/base'
                     if(item.title)
                     return (<Media key={index} className="media-box">
                         <Media left href="#">
-                            <Media className="media-img" object data-src={item.avatar} src={item.avatar} alt="Generic placeholder image" />
+                            <Media className="media-img" object data-src={item.avatar} src={item.avatar||apiUrl+'/img/expressImg/0101.jpg'} alt="Generic placeholder image" />
                         </Media>
                         <Media body className="media-body">
                             <Media className="media-title">
@@ -116,11 +99,11 @@ import { apiUrl } from '../../config/base'
                             <div className="foot-box">
                                 <div>
                                     <FontAwesome className="fa-fw" name="comment" />&nbsp;
-                                    {item.comments}
+                                    {item.comments||0}
                                 </div>
                                 <div>
                                     <FontAwesome className="fa-fw" name="eye" />&nbsp;
-                                    {item.views}
+                                    {item.browse_count||0}
                                 </div>
                             </div>
                         </Media>
@@ -129,11 +112,11 @@ import { apiUrl } from '../../config/base'
                     return (
                         <Media key={index} className="media-box">
                         <Media left href="#">
-                            <Media className="media-img" object data-src={item.avatar} src={item.avatar} alt="Generic placeholder image" />
+                            <Media className="media-img" object data-src={item.avatar} src={item.avatar||apiUrl+'/img/expressImg/0101.jpg'} alt="Generic placeholder image" />
                         </Media>
                         <Media body className="media-body">
                             <Media className="media-title" >
-                                {item.username}
+                                {item.author}
                             </Media>
                             <div className="foot-box">
                                 {item.comment}

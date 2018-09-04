@@ -29,7 +29,8 @@ import { history } from '../../store/configureStore';
             return (
                 <Card className="card-item" key={index}>
                     <div className="card-img" key="3" onClick={this.toBlog} data-id={item.id} 
-                    data-title={item.title} style={{backgroundImage: "url(" + require('../../images/static_imgs/webPic.jpg') + ")" }}/>
+                    data-title={item.title} style={
+                    {backgroundImage: "url(" + ((item.img_url)?item.img_url: require('../../images/static_imgs/webPic.jpg')) + ")" }}/>
                     <CardBody className="card-body">
                         <CardTitle data-id={item.id} onClick={this.toBlog}
                         data-title={item.title}>{item.title}</CardTitle>
@@ -43,7 +44,7 @@ import { history } from '../../store/configureStore';
                             <FontAwesome className="fa-fw" name="clock-o" />&nbsp;{item.pub_datetime}
                             </NavItem>
                             <NavItem style={{marginRight: "5px"}}>
-                            <FontAwesome className="fa-fw" name="comments-o" />&nbsp;28
+                            <FontAwesome className="fa-fw" name="comments-o" />&nbsp;{item.comments||0}
                             </NavItem>
                         </Nav>
                     </CardBody>

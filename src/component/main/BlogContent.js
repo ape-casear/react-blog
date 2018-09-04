@@ -12,6 +12,7 @@ import hljs from 'highlight.js';
 import 'highlight.js/styles/monokai-sublime.css';
 import qs from 'qs';
 import Comments from './Comments';
+import BreadcrumbCus from './comment/BreadcrumbCus';
  class BlogContent extends Component{
     constructor(props) {
         super(props);
@@ -47,19 +48,7 @@ import Comments from './Comments';
                 <h2 className="font-white font-shadow">{this.state.title}</h2>
                 <h6 className="font-white font-shadow">男性の変態は何が問題なのですか？</h6>
                 <h6 className="font-white font-shadow">is there has any problem with man's lechery?</h6>
-                <div style={{width: "100%"}}>
-                
-                <Breadcrumb tag="nav">
-                    <BreadcrumbItem tag="div" href=""><Link to="/">
-                    <FontAwesome name="home" className="fa-fw"/>
-                    Home</Link></BreadcrumbItem>
-                    <BreadcrumbItem active tag="span">正文</BreadcrumbItem>
-
-                    <div className="share" >分享到:
-                    <FontAwesome name="weibo" className="fa-fw"/>
-                    </div>
-                </Breadcrumb>
-                </div>
+                <BreadcrumbCus name="正文"/>
                 <Card className="blog">
                     <MarkDown source={this.state.content}></MarkDown>
                 </Card>

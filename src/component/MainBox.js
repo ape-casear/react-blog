@@ -7,6 +7,7 @@ import { Button, Container, Row, Col, Nav, NavItem, NavLink, Dropdown,DropdownTo
 import MainIndex from './main/MainIndex';
 import RightBar from './main/RightBar';
 import BlogContent from './main/BlogContent';
+import ZHScraper from './main/projects/ZHScraper';
  class MainBox extends Component{
     constructor(props) {
         super(props);
@@ -23,11 +24,12 @@ import BlogContent from './main/BlogContent';
             <div className="main-box" 
             style={(this.props.window.innerWidth < 768 && this.props.side_toggle == 'on')?{height:(this.props.window.innerHeight-49)+"px", overflow:'hidden'}:{}}
             >
-                <Row >
+                <Row style={{marginRight: '-14px',marginLeft: '-14px'}}>
                     <Col className="main-box-left" xs="12" >
                         <Switch>
                             <Route exact path="/" name="index" component={MainIndex}></Route>
                             <Route path="/blog/:blog" name="index" component={BlogContent}></Route>
+                            <Route path="/zhihu" name="zhihu" component={ZHScraper}></Route>
                         </Switch>
                     </Col>
                     <Col className="main-box-right" xs="12">

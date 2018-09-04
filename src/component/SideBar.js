@@ -48,10 +48,25 @@ import { Link } from 'react-router-dom';
         let list = side_bar.map(item=>{
             return (
                 <NavItem key={item.id}>
-                    <NavLink className={item.link.className} id={item.link.id} href='#'
-                    data-route={item.href}>
+                    <NavLink tag="span" className={item.link.className} id={item.link.id} href='#'
+                    data-route={item.href} style={{color: '#a6a8b1'}}>
                         <FontAwesome className={item.icon.className} data-route={item.href} name={item.icon.name} ></FontAwesome>&nbsp;&nbsp;
-                    {item.name}
+                    {
+                        (()=>{
+                            if(item.href){
+                                return (
+                                    <Link to={"/"+item.href}
+                                    onClick={this.closeSideBarForce}
+                                    >{item.name}</Link>
+                                )
+                            }else{
+                                return (
+                                    <span>{item.name}</span>
+                                )
+                            }
+                            
+                        })()
+                    }
                     </NavLink>
                     {
                         (()=>{
