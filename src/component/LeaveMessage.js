@@ -12,12 +12,17 @@ import saying from '../config/saying';
     constructor(props) {
         super(props);
         this.state = {
-      
+            goToWork: false
         }
-       
+        this.tellBtoReRender = this.tellBtoReRender.bind(this)
     }
     componentDidMount(){
 
+    }
+    tellBtoReRender(){
+        this.setState({
+            goToWork: !this.state.goToWork
+        })
     }
     render(){
         return (
@@ -37,8 +42,8 @@ import saying from '../config/saying';
                         )
                     })}
                     <div style={{margin: '1rem 0px'}}></div>
-                    <CommentList bloglistid="15" mode="留言"/>
-                    <ReplyBox bloglistid="15" mode="留言" title="留下足迹"/>
+                    <CommentList bloglistid="15" mode="留言" work={this.state.goToWork}/>
+                    <ReplyBox bloglistid="15" mode="留言" title="留下足迹" callback={this.tellBtoReRender}/>
                 </Card>
                 </div>
             </div>

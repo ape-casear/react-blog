@@ -27,6 +27,7 @@ import BreadcrumbCus from './comment/BreadcrumbCus';
         console.log('BlogContent did mount')
         let id = this.props.match.params.blog;
         let { title } = qs.parse(this.props.location.search.replace('?',''))
+        console.log(qs.parse)
         this.setState({
             title
         })

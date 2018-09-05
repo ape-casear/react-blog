@@ -13,18 +13,23 @@ class Comments extends Component{
     constructor(props) {
         super(props);
         this.state = {
-           
+            goToWork: false
         }
+        this.tellBtoReRender = this.tellBtoReRender.bind(this)
     }
     componentDidMount(){
         console.log(this.props)
     }
-
+    tellBtoReRender(){
+        this.setState({
+            goToWork: !this.state.goToWork
+        })
+    }
     render(){
         return (
             <Card className="comment-box">
-                <ReplyBox bloglistid={this.props.bloglistid}/>
-                <CommentList bloglistid={this.props.bloglistid}/>
+                <ReplyBox bloglistid={this.props.bloglistid} callback={this.tellBtoReRender}/>
+                <CommentList bloglistid={this.props.bloglistid} work={this.state.goToWork}/>
             </Card>
         )
     }

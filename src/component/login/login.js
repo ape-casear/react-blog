@@ -20,7 +20,7 @@ class Login extends Component{
             valid: false,
             invalid: false,
             title: '',
-            mode: 0
+            mode: 0                     //  0:登录   1:注册
         }
         this.bindEmailInput = this.bindEmailInput.bind(this)
         this.bindPasswordInput = this.bindPasswordInput.bind(this)
@@ -98,12 +98,14 @@ class Login extends Component{
         shaObj.update(this.state.passwordInput+'wdwblog')
         //console.log(this.state.passwordInput+'wdwblog')
         let password = shaObj.getHash("HEX");
-        //console.log(password)
+        console.log(password)
 
         if(this.state.mode == 0){
             this.props.dispatch(httpAction('/user/login', 'post', {author: this.state.emailInput, password }, (res)=>{
                 if(res.data.code == 0){
                     localStorage.ACCESS_TOKEN = JSON.stringify(res.data.data);
+                    localStorage.author = this.state.emailInput;
+
                     history.goBack()
                 }else{
                     this.setState({

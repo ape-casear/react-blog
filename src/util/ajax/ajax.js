@@ -1,13 +1,14 @@
 import axios from 'axios'
 import { apiUrl } from '../../config/base'
+import qs from 'qs';
 // axios配置
 const axiosBaseConfig = {
     // baseURL: prefix,
     timeout: 10000,
-    headers: { 'Content-Type': 'text/plain' },
+    /* headers: { 'Content-Type': 'text/plain' }, */
 
     // 跨域请求，是否带上认证信息
-    withCredentials: false, // default
+    withCredentials: true, // default
     // http返回的数据类型
     // 默认是json，可选'arraybuffer', 'blob', 'document', 'json', 'text', 'stream'
     responseType: 'json', // default
@@ -25,7 +26,7 @@ const axiosBaseConfig = {
       }
       // 请求对象转换成json字符串
       if (typeof data === 'object') {
-        return JSON.stringify(data)
+        return qs.stringify(data)
       }
       return data
     }],
@@ -41,8 +42,20 @@ const axiosBaseConfig = {
       respData,
     ],
 }
-
 const instance = axios.create(axiosBaseConfig)
+// 请求拦截器
+instance.interceptors.request.use(function (config) {
+  if(localStorage.getItem('ACCESS_TOKEN')){
+    let token = JSON.parse(localStorage.getItem('ACCESS_TOKEN'));
+    token = token&&token.token
+    config.headers.authorization = 'Bearer '+ token;
+  }
+  
+  return config;
+}, function (error) {
+  // Do something with request error
+  return Promise.reject(error);
+});
 
 function request(url, method, Data){
     /* if(params && params.length > 0){

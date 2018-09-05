@@ -29,6 +29,7 @@ class ReplyBox extends Component{
         if(this.props.title){
             this.setState({title: this.props.title})
         }
+        console.log('id:',this.props.id)
     }
     /* 提交评论 */
     comment(){
@@ -45,32 +46,38 @@ class ReplyBox extends Component{
 
         /* 正常评论 */
         }else{
-            if(document.cookie.indexOf('ACCESS_TOKEN') >= 0){
+            if(document.cookie.indexOf('ACCESS_TOKEN') >= 0 || localStorage.getItem('ACCESS_TOKEN')){
                 /* 评论api */
                 this.props.dispatch(httpAction('/comment/addcomment', 'post', 
                 { bloglistid: this.props.bloglistid, comment: this.state.textInput, author: null, parent: this.props.id || 0 }, (res)=>{
                     /* 判断是回复评论 还是评论文章 */
+                    let newComment = res.data.data;
+                    newComment.sub_comment = [];
                     if(this.props.id){
                         let new_commentList = this.props.commentList.map(item=>{
                             if(item.id == this.props.id){
                                 if(item.sub_comment){
                                     item.sub_comment.push(
-                                        /* 评论返回信息 */
+                                        newComment
                                     )
                                 }else{
-                                    item.sub_comment = [{/* 评论返回信息 */}]
+                                    item.sub_comment = [newComment]
                                 }
                             }
                             return item;
                         })
                         this.props.dispatch({type:'GET_COMMENT_LIST', payload:{commentList: new_commentList}})
                     }else{
-                        let new_commentList = this.props.commentList
-                        new_commentList.push( /* 评论返回信息 */)
+                        console.log('add comment:',this.props.id)
+                        let new_commentList = this.props.commentList;
+                        new_commentList.push( newComment )
+                        console.log(new_commentList)
                         this.props.dispatch({type:'GET_COMMENT_LIST', payload:{commentList: new_commentList}})
                     }
+                    this.props.callback()
                 }))
             }else{
+
                 this.setState({
                     modal: true,
                     message: '没登陆就想发言？我劝你还是对评论有点敬畏之心(点击游客发言也可)',
@@ -143,7 +150,8 @@ class ReplyBox extends Component{
 
 function mapStateToProps(state){
     return {
-        blogList: state.mainIndex.blogList
+        blogList: state.mainIndex.blogList,
+        commentList: state.mainIndex.commentList
     }
 }   
  export default connect(mapStateToProps)(ReplyBox)

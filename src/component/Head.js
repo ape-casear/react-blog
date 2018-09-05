@@ -15,6 +15,7 @@ class Head extends Component{
             isOpen : false,
             orientation: 'expand',
             progress: 0,
+            user: '登录'
         }
         this.toggle = this.toggle.bind(this)
         this.closeSideBar = this.closeSideBar.bind(this)
@@ -39,9 +40,9 @@ class Head extends Component{
     }
     closeSideBar(e){
         stopEvent(e)
-        let type = this.props.side_toggle == 'on'? 'off': 'on';
+        let type = this.props.side_toggle === 'on'? 'off': 'on';
         this.setState({
-            orientation: this.state.orientation == 'expand'? 'compress':'expand'
+            orientation: this.state.orientation === 'expand'? 'compress':'expand'
         })
         this.props.dispatch({type: 'switch sideOutIn', payload: { sidebar: type }})
     }
@@ -65,20 +66,25 @@ class Head extends Component{
     }
 
     componentDidMount(){
+        let user = localStorage.getItem('author');
+        document.cookie.indexOf('ACCESS_TOKEN') >= 0 || localStorage.getItem('ACCESS_TOKEN')
+        if((document.cookie.indexOf('ACCESS_TOKEN') >= 0 || localStorage.getItem('ACCESS_TOKEN')) && user){
+            this.setState({user: user})
+        }
         window.onresize = ()=>{
             if(window.innerWidth > 768){
-                this.props.side_toggle=='off'&&this.props.dispatch({type: 'switch sideOutIn', payload: { sidebar: 'on' }})
+                this.props.side_toggle==='off'&&this.props.dispatch({type: 'switch sideOutIn', payload: { sidebar: 'on' }})
             }else if(window.innerWidth <= 768){
-                this.props.side_toggle=='on'&&this.props.dispatch({type: 'switch sideOutIn', payload: { sidebar: 'off' }})
+                this.props.side_toggle==='on'&&this.props.dispatch({type: 'switch sideOutIn', payload: { sidebar: 'off' }})
             }
             this.props.dispatch({type: 'windowSize', payload: { innerWidth: window.innerWidth ,innerHeight: window.innerHeight}})
         };
     }
     async componentWillReceiveProps(nextProps){
-        if(this.props.loading == false && nextProps.loading == true){
+        if(this.props.loading === false && nextProps.loading === true){
             this.loading()
         }
-        if(this.props.loading == true && nextProps.loading == false){
+        if(this.props.loading === true && nextProps.loading === false){
             this.setState({progress: 100})
             await timeout(200)
             this.setState({progress: 0})
@@ -132,15 +138,27 @@ class Head extends Component{
                         给我打钱
                     </DropdownItem>
                     <DropdownItem divider />
-                    <DropdownItem data-path="login" onClick={this.jumpTo}>
-                        登录
-                    </DropdownItem>
+                    {(()=>{
+                        if(this.state.user === '登录'){
+                            return (
+                                <DropdownItem data-path="login" onClick={this.jumpTo}>
+                                    登录
+                                </DropdownItem>
+                            )
+                        }else{
+                            return (
+                                <DropdownItem data-path="user">
+                                    {this.state.user}
+                                </DropdownItem>
+                            )
+                        }
+                    })()}
                     </DropdownMenu>
                 </UncontrolledDropdown>
                 </Nav>
             </Collapse>
             </Navbar>
-            <Progress className="loading-progress" style={(this.state.progress==0)?{display:'none'}:{}} value={this.state.progress} />
+            <Progress className="loading-progress" style={(this.state.progress===0)?{display:'none'}:{}} value={this.state.progress} />
             </div>
         )
     }

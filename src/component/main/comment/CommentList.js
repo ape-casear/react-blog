@@ -8,6 +8,7 @@ import FontAwesome from  'react-fontawesome';
 import { Link } from 'react-router-dom';
 import ReplyBox from './ReplyBox';
 import qs from 'qs';
+import PaginationCus from './PaginationCus';
 class CommentList extends Component{
     constructor(props) {
         super(props);
@@ -17,6 +18,7 @@ class CommentList extends Component{
         }
         this.reply = this.reply.bind(this)
         this.cancel = this.cancel.bind(this)
+        this.cb = this.cb.bind(this)
     }
     componentDidMount(){
         let id = this.props.bloglistid;
@@ -38,32 +40,53 @@ class CommentList extends Component{
                 parents.push(ele)
                 }
             }
-            this.props.dispatch({type:'GET_COMMENT_LIST', payload:{commentList: parents}})
+            if(this.props.mode){
+                parents.reverse()
+            }
+            let onePage = parents.slice(0, 5)
+            this.props.dispatch({type:'GET_COMMENT_LIST', payload:{
+                commentList: onePage,
+                totalComments: parents,
+                comPageNum: 0,
+                comTotalPages: Math.ceil(parents.length/5) >10? 10: Math.ceil(parents.length/5)
+            }})
         }))
+    }
+    componentWillReceiveProps(nextProps){
+        console.log('old props',this.props.work)
+        console.log('new props',nextProps.work)
     }
     reply(e){
         let id = e.target.dataset.parent;
-        /*  this.$ajax.post('http://www.weidongwei.com:88/comment/addcomment', 
-             { bloglistid: data.bloglistid, comment: data.comment, author: data.author, parent: 0 },
-             {
-                transformRequest: [function (data) {
-                  data = qs.stringify(data);
-                  return data;
-                }],     
-              } */
        this.setState({
            replyIndex: id
        })
     }
     cancel(){
+        let id = this.props.bloglistid;
         this.setState({
             replyIndex: -1
         })
     }
+    cb(page){
+        let list;
+        console.log(page)
+        if(page*5> this.props.totalComments.length){
+            list = this.props.totalComments.slice((page-1)*5)
+        }else{
+            list = this.props.totalComments.slice((page-1)*5, page*5)
+        }
+        this.props.dispatch({type:'GET_COMMENT_LIST', payload:{
+            commentList: list,
+            comPageNum: page,
+        }})
+    }
     render(){
         return (
             <div className="comment-list">
-                <p style={{fontSize:'16px'}}>{this.state.comment_length}条{this.props.mode||'评论'}</p>
+                <p style={{fontSize:'16px'}}>{this.state.comment_length}条{this.props.mode||'评论'}
+                &nbsp;&nbsp;&nbsp;
+                {this.props.commentList.length}楼</p>
                 <hr style={{filter : "alpha(opacity=100,finishopacity=0,style=3)", margin: '0.3rem auto', width:"100%", borderTop:"1px solid #aaa"}} />
                 {this.props.commentList.map((item,index)=>{
                     return (
@@ -76,10 +99,10 @@ class CommentList extends Component{
                             <Media body>
                                 <Media heading>
                                 {item.author}
-                                
+                                <span className="com-floor" style={(this.props.mode)?{display:'none'}:{}}>#{index+1}楼</span>
                                 </Media>
                                 <div className="media-time">{item.comment_datetime}</div>
-                                {item.comment}我是一个粉刷匠粉刷本领强我是一个粉刷匠粉刷本领强我是一个粉刷匠粉刷本领强
+                                {item.comment}
                                 <Button className="reply-btn" data-parent={item.id} 
                                     onClick={this.reply}>回复</Button>
                                 {item.sub_comment.map((sub_item, index)=>{
@@ -114,6 +137,7 @@ class CommentList extends Component{
                         </Media>
                     )
                 })}
+                <PaginationCus callback={this.cb} list={this.props.totalComments} index={this.props.comPageNum}/>
             </div>
         )
     }
@@ -122,8 +146,9 @@ class CommentList extends Component{
 
 function mapStateToProps(state){
     return {
-        
-        commentList: state.mainIndex.commentList
+        commentList: state.mainIndex.commentList,
+        totalComments: state.mainIndex.totalComments,
+        comPageNum: state.mainIndex.comPageNum,
     }
 }   
  export default connect(mapStateToProps)(CommentList)
