@@ -7,7 +7,7 @@ import MainIndex from './main/MainIndex';
 import RightBar from './main/RightBar';
 import BlogContent from './main/BlogContent';
 import ZHScraper from './main/projects/ZHScraper';
-
+import Bus from '../App';
  class MainBox extends Component{
     constructor(props) {
         super(props);
@@ -30,7 +30,7 @@ import ZHScraper from './main/projects/ZHScraper';
                             <Route exact path="/" name="index" component={MainIndex}></Route>
                             <Route path="/blog/:blog" name="index" component={BlogContent}></Route>
                             <Route path="/zhihu" name="zhihu" component={ZHScraper}></Route>
-                            <Route path="/bloglist-category" name="category" component={MainIndex}></Route>
+                            <Route path="/bus" name="category" component={Bus}></Route>
                         </Switch>
                     </Col>
                     <Col className="main-box-right" xs="12">

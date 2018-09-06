@@ -103,7 +103,7 @@ class CommentList extends Component{
             <div className="comment-list">
                 <p style={{fontSize:'16px'}}>{this.state.comment_length}条{this.props.mode||'评论'}
                 &nbsp;&nbsp;&nbsp;
-                {this.props.totalComments.length}楼</p>
+                {this.props.totalComments.length}楼</p><span style={{display: 'none'}}>{this.props.work}</span>
                 <hr style={{filter : "alpha(opacity=100,finishopacity=0,style=3)", margin: '0.3rem auto', width:"100%", borderTop:"1px solid #aaa"}} />
                 {this.props.commentList.map((item,index)=>{
                     return (

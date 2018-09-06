@@ -23,6 +23,9 @@ import httpAction from '../util/ajax/httpAction';
     }
     componentDidMount(){
         this.setState({side_bar})
+        for(let e in side_bar[1]){
+            console.log(`key:${e},value:${side_bar[1][e]}`)
+        }
         this.props.dispatch(httpAction('/bloglist-category', 'get', null, res=>{
             let data = res.data.data;
             let side_bar = this.state.side_bar;
@@ -42,6 +45,9 @@ import httpAction from '../util/ajax/httpAction';
             this.setState({side_bar})
         }))
     }
+    componentWillUnmount(){
+        side_bar[1].sub_link = []
+    }
     toggle() {
         this.setState({
             dropdownOpen: !this.state.dropdownOpen
@@ -50,7 +56,7 @@ import httpAction from '../util/ajax/httpAction';
     navigateTo(e){
         if(e.target.dataset.route){
             console.log('navigateTo')
-            history.push('/bloglist-category?category='+ e.target.dataset.route)
+            history.push('/bus?category='+ e.target.dataset.route)
         }
         if(window.innerWidth < 768){
             this.props.dispatch({type: 'switch sideOutIn', payload: { sidebar: 'off' }})
@@ -93,7 +99,7 @@ import httpAction from '../util/ajax/httpAction';
                     {
                         (()=>{
                             if(item.sub_link)
-                                return (<UncontrolledCollapse toggler={'#'+item.link.id}>
+                                return (<UncontrolledCollapse id="" toggler={'#'+item.link.id}>
                                     {item.sub_link.map(sub_item=>{
                                         return (<NavLink key={sub_item.id} className={sub_item.className} data-route={sub_item.name} href="#" onClick={this.navigateTo}>
                                         <FontAwesome className={sub_item.icon.className} data-route={sub_item.name} name={sub_item.icon.name} />&nbsp;&nbsp;
@@ -112,7 +118,7 @@ import httpAction from '../util/ajax/httpAction';
               <UpInfo></UpInfo>
               <Nav  vertical>
                     <NavItem onClick={this.closeSideBarForce}>
-                        <Link to="/"><NavLink tag="div" >
+                        <Link to="/bus"><NavLink tag="div" >
                         <FontAwesome className="fa fa-fw" name="home" />&nbsp;&nbsp;
                         HOME</NavLink></Link>
                     </NavItem>

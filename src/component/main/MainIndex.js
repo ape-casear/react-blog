@@ -7,6 +7,7 @@ import FontAwesome from  'react-fontawesome';
 import qs from 'qs';
 import { history } from '../../store/configureStore';
 import PaginationCus from './comment/PaginationCus';
+
  class MainIndex extends Component{
     constructor(props) {
         super(props);
@@ -20,8 +21,13 @@ import PaginationCus from './comment/PaginationCus';
     }
     componentDidMount(){
         console.log(this.props)
-        if(this.props.location.search)return
-        this.props.dispatch(httpAction('/bloglist/0','get',null, (res)=>{
+        let query, _query = this.state.query;
+        if(this.props.location.search){
+            query = qs.parse(this.props.location.search.replace('?',''));
+            _query = Object.entries(query)
+            this.setState({query: _query})
+        }
+        this.props.dispatch(httpAction('/bloglist/0' + this.props.location.search,'get',null, (res)=>{
             let blogList = res.data.data.bloglist;
             let totalPage = Math.ceil(res.data.data.total_page/5);
             this.setState({totalPage})
@@ -36,39 +42,18 @@ import PaginationCus from './comment/PaginationCus';
             })
         }))
     }
-    componentWillUpdate(){
-        window.scrollTo(0,0)
-        console.log('index well update')
-        console.log(this.props.location)
-        if(this.props.location.search){
-            let query = qs.parse(this.props.location.search.replace('?',''));
-            if(query.category=='未分类')query.category = 'untide'
-            this.setState({query: [ ['type', query.category] ]})
-           
-            this.props.dispatch(httpAction('/bloglist/0?type=' + query.category,'get',null, (res)=>{
-                let blogList = res.data.data.bloglist;
-                let totalPage = Math.ceil(res.data.data.total_page/5);
-                this.setState({totalPage})
-                this.props.dispatch({type:'GET_BLOG_LIST_MAIN', payload: {
-                        blogList,
-                        pageNum: 1,
-                        totalPages:
-                        totalPage > 8? [1,2,3,4,5,6,7,8]:new Array(totalPage).fill(1).map((item,index)=>{
-                            return index+item;
-                        })
-                    } 
-                })
-            }))
-        }
+    componentWillUpdate(nextProps, nextState){
+
     }
-    toBlog(e){
-        this.props.dispatch({type: "GET_BLOG_LIST_MAIN", payload: { currentBlog: e.target.dataset.index}})
-        history.push('/blog/'+e.target.dataset.id + "?title=" + e.target.dataset.title)
+    toBlog(index, title, id){
+        console.log('goto blog work')
+        this.props.dispatch({type: "GET_BLOG_LIST_MAIN", payload: { currentBlog: index}})
+        history.push('/blog/'+ id + "?title=" + title)
     }
     cb(page){
         let query = '?'; 
         this.state.query.forEach(item=>{
-            query = query + item[0] + "=" + item[1]
+            query = query + item[0] + "=" + item[1] + "&"
         })
         this.props.dispatch(httpAction('/bloglist/'+(page-1)+ query, 'get', null, res=>{
             let totalPage = this.state.totalPage;
@@ -103,12 +88,11 @@ import PaginationCus from './comment/PaginationCus';
         let list = blogList.map((item, index)=>{
             return (
                 <Card className="card-item" key={index}>
-                    <div className="card-img" key="3" onClick={this.toBlog} data-id={item.id} 
-                    data-title={item.title} data-index={index} style={
+                    <div className="card-img" key="3" onClick={this.toBlog.bind(this, index, item.title, item.id)}  
+                     style={
                     {backgroundImage: "url(" + ((item.img_url)?item.img_url: require('../../images/static_imgs/webPic.jpg')) + ")" }}/>
-                    <CardBody className="card-body">
-                        <CardTitle tag="h4" data-id={item.id} onClick={this.toBlog}
-                        data-title={item.title} data-index={index}>{item.title}</CardTitle>
+                    <CardBody className="card-body" onClick={this.toBlog.bind(this, index, item.title, item.id)} >
+                        <CardTitle tag="h4"  onClick={this.toBlog.bind(this, index, item.title, item.id)}>{item.title}</CardTitle>
                         <CardSubtitle>Card subtitle</CardSubtitle>
                         <hr style={{filter : "alpha(opacity=100,finishopacity=0,style=3)", margin: '0.5em auto', width:"100%"}} />
                         <Nav style={{fontSize: '14px', fontWeight: '300'}}>

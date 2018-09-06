@@ -31,6 +31,7 @@ class ReplyBox extends Component{
         console.log('id:',this.props.id)
     }
     callback(res){
+        console.log('this callback work')
         toast.info('评论成功：）',{
             position: toast.POSITION.TOP_CENTER,
             autoClose: 1500,
@@ -61,7 +62,7 @@ class ReplyBox extends Component{
             console.log(new_commentList)
             this.props.dispatch({type:'GET_COMMENT_LIST', payload:{commentList: new_commentList}})
         }
-        this.props.callback()
+        setTimeout(this.props.callback,1500)
     }
     /* 提交评论 */
     comment(){
