@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Router, Route, Switch } from 'react-router';
-import { Card, Container, Row, Col, Nav, NavItem, NavLink, Dropdown,ListGroupItem, DropdownMenu,DropdownItem,
-    ListGroup,Jumbotron,Button,Collapse,UncontrolledDropdown
+
+import { Card
 } from 'reactstrap';
-import FontAwesome from  'react-fontawesome';
+
 import CommentList from './main/comment/CommentList';
 import ReplyBox from './main/comment/ReplyBox';
 import saying from '../config/saying';
@@ -42,8 +41,8 @@ import saying from '../config/saying';
                         )
                     })}
                     <div style={{margin: '1rem 0px'}}></div>
-                    <CommentList bloglistid="15" mode="留言" work={this.state.goToWork}/>
-                    <ReplyBox bloglistid="15" mode="留言" title="留下足迹" callback={this.tellBtoReRender}/>
+                    <CommentList bloglistid="12" mode="留言" work={this.state.goToWork}/>
+                    <ReplyBox bloglistid="12" mode="留言" title="留下足迹" callback={this.tellBtoReRender}/>
                 </Card>
                 </div>
             </div>

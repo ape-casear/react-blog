@@ -1,24 +1,46 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Container, Row, Col, Nav, NavItem, NavLink, Dropdown,DropdownToggle, DropdownMenu,DropdownItem,
-    Navbar,NavbarBrand,NavbarToggler,Collapse,UncontrolledDropdown, UncontrolledCollapse
+import { Nav, NavItem, NavLink,UncontrolledCollapse,Badge
 } from 'reactstrap';
 import FontAwesome from  'react-fontawesome';
 import UpInfo from './UpInfo';
 import { side_bar } from '../config/layout-config';
 import { history } from '../store/configureStore';
 import { Link } from 'react-router-dom';
+import httpAction from '../util/ajax/httpAction';
  class SideBar extends Component{
     constructor(props) {
         super(props);
         this.state = {
             dropdownOpen: false,
-            active: 0
+            active: 0,
+            side_bar: []
         }
         this.toggle = this.toggle.bind(this);
         this.navigateTo = this.navigateTo.bind(this);
         this.closeSideBarForce = this.closeSideBarForce.bind(this)
         this.onBlur = this.onBlur.bind(this)
+    }
+    componentDidMount(){
+        this.setState({side_bar})
+        this.props.dispatch(httpAction('/bloglist-category', 'get', null, res=>{
+            let data = res.data.data;
+            let side_bar = this.state.side_bar;
+            data.forEach((item,index)=>{
+                side_bar[1].sub_link.push({
+                    id: index,
+                    className: 'subbar',
+                    name: item.tag||'未分类',
+                    icon:{
+                        name: 'link',
+                        className: 'super-crazy-colors fa-fw'
+                    },
+                    count: item.count
+                })
+
+            })
+            this.setState({side_bar})
+        }))
     }
     toggle() {
         this.setState({
@@ -28,7 +50,7 @@ import { Link } from 'react-router-dom';
     navigateTo(e){
         if(e.target.dataset.route){
             console.log('navigateTo')
-            history.push('/'+ e.target.dataset.route)
+            history.push('/bloglist-category?category='+ e.target.dataset.route)
         }
         if(window.innerWidth < 768){
             this.props.dispatch({type: 'switch sideOutIn', payload: { sidebar: 'off' }})
@@ -40,12 +62,12 @@ import { Link } from 'react-router-dom';
         }
     }
     onBlur(){
-        console.log('blur')
+       
     }
     render(){
         console.log(this.props.side_toggle)
 
-        let list = side_bar.map(item=>{
+        let list = this.state.side_bar.map(item=>{
             return (
                 <NavItem key={item.id}>
                     <NavLink tag="span" className={item.link.className} id={item.link.id} href='#'
@@ -75,7 +97,9 @@ import { Link } from 'react-router-dom';
                                     {item.sub_link.map(sub_item=>{
                                         return (<NavLink key={sub_item.id} className={sub_item.className} data-route={sub_item.name} href="#" onClick={this.navigateTo}>
                                         <FontAwesome className={sub_item.icon.className} data-route={sub_item.name} name={sub_item.icon.name} />&nbsp;&nbsp;
-                                        {sub_item.name}</NavLink>)
+                                        {sub_item.name}
+                                        {sub_item.count&&<Badge tag="span" color="secondary" style={{float: 'right'}}>{sub_item.count}</Badge>}
+                                        </NavLink>)
                                     })}
                                     </UncontrolledCollapse>)
                         })()

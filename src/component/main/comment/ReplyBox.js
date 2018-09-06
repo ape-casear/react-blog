@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, CardImg, Modal, ModalHeader, ModalBody, ModalFooter, NavItem, Dropdown,DropdownToggle, DropdownMenu,DropdownItem,
-    Navbar,Input,Label,FormGroup,Form
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter,Input,Label,FormGroup,Form
 } from 'reactstrap';
 import httpAction from '../../../util/ajax/httpAction';
-import FontAwesome from  'react-fontawesome';
-import { Link } from 'react-router-dom';
+
 import { history } from '../../../store/configureStore';
-import qs from 'qs';
+import { ToastContainer, toast } from 'react-toastify';
 class ReplyBox extends Component{
     constructor(props) {
         super(props);
@@ -24,12 +22,46 @@ class ReplyBox extends Component{
         this.bindCheckInput = this.bindCheckInput.bind(this);
         this.toggle = this.toggle.bind(this);
         this.goLogin = this.goLogin.bind(this);
+        this.callback = this.callback.bind(this);
     }
     componentDidMount(){
         if(this.props.title){
             this.setState({title: this.props.title})
         }
         console.log('id:',this.props.id)
+    }
+    callback(res){
+        toast.info('评论成功：）',{
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 1500,
+            className: 'react-toastify'
+        })
+        this.setState({textInput: ''})
+        /* 判断是回复评论 还是评论文章 将新评论添加到评论列表*/
+        let newComment = res.data.data;
+        newComment.sub_comment = [];
+        if(this.props.id){
+            let new_commentList = this.props.commentList.map(item=>{
+                if(item.id == this.props.id){
+                    if(item.sub_comment){
+                        item.sub_comment.push(
+                            newComment
+                        )
+                    }else{
+                        item.sub_comment = [newComment]
+                    }
+                }
+                return item;
+            })
+            this.props.dispatch({type:'GET_COMMENT_LIST', payload:{commentList: new_commentList}})
+        }else{
+            console.log('add comment:',this.props.id)
+            let new_commentList = this.props.commentList;
+            new_commentList.push( newComment )
+            console.log(new_commentList)
+            this.props.dispatch({type:'GET_COMMENT_LIST', payload:{commentList: new_commentList}})
+        }
+        this.props.callback()
     }
     /* 提交评论 */
     comment(){
@@ -43,39 +75,14 @@ class ReplyBox extends Component{
         }
         /* 匿名评论 */
         if(this.state.checkInput){
-
+            this.props.dispatch(httpAction('/comment/addcomment', 'post', 
+            { bloglistid: this.props.bloglistid, comment: this.state.textInput, author: 'anonymous', parent: this.props.id || 0 }, this.callback))
         /* 正常评论 */
         }else{
             if(document.cookie.indexOf('ACCESS_TOKEN') >= 0 || localStorage.getItem('ACCESS_TOKEN')){
                 /* 评论api */
                 this.props.dispatch(httpAction('/comment/addcomment', 'post', 
-                { bloglistid: this.props.bloglistid, comment: this.state.textInput, author: null, parent: this.props.id || 0 }, (res)=>{
-                    /* 判断是回复评论 还是评论文章 */
-                    let newComment = res.data.data;
-                    newComment.sub_comment = [];
-                    if(this.props.id){
-                        let new_commentList = this.props.commentList.map(item=>{
-                            if(item.id == this.props.id){
-                                if(item.sub_comment){
-                                    item.sub_comment.push(
-                                        newComment
-                                    )
-                                }else{
-                                    item.sub_comment = [newComment]
-                                }
-                            }
-                            return item;
-                        })
-                        this.props.dispatch({type:'GET_COMMENT_LIST', payload:{commentList: new_commentList}})
-                    }else{
-                        console.log('add comment:',this.props.id)
-                        let new_commentList = this.props.commentList;
-                        new_commentList.push( newComment )
-                        console.log(new_commentList)
-                        this.props.dispatch({type:'GET_COMMENT_LIST', payload:{commentList: new_commentList}})
-                    }
-                    this.props.callback()
-                }))
+                { bloglistid: this.props.bloglistid, comment: this.state.textInput, author: null, parent: this.props.id || 0 }, this.callback))
             }else{
 
                 this.setState({
@@ -142,6 +149,7 @@ class ReplyBox extends Component{
                         <Button color="secondary" onClick={this.toggle} size="sm">去你的</Button>
                     </ModalFooter>
                 </Modal>
+                <ToastContainer/>
             </div>
         )
     }

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Router, Route, Switch } from 'react-router';
-import { Button, Container, Row, Col, Nav, NavItem, NavLink, Dropdown,DropdownToggle, DropdownMenu,DropdownItem,
-    Navbar,NavbarBrand,NavbarToggler,Collapse,UncontrolledDropdown
-} from 'reactstrap';
+import {  Route, Switch } from 'react-router';
+
 import Head from './Head'; 
 import SideBar from './SideBar'; 
 import MainBox from './MainBox';

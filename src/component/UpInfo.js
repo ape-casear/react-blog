@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Card, CardBody, CardTitle, CardSubtitle, CardText, CardLink, NavLink, Dropdown,DropdownToggle, DropdownMenu,DropdownItem,
-    Navbar,NavbarBrand,NavbarToggler,Collapse,UncontrolledDropdown
+import { Card, CardBody, CardTitle, CardSubtitle, CardText, CardLink
 } from 'reactstrap';
 import FontAwesome from  'react-fontawesome';
 

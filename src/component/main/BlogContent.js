@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, CardImg, CardTitle, CardSubtitle, Card, Nav, CardBody, NavItem, Dropdown,DropdownToggle, DropdownMenu,DropdownItem,
-    Navbar,NavbarBrand,NavbarToggler,BreadcrumbItem,Breadcrumb
-} from 'reactstrap';
+import { Card } from 'reactstrap';
 import httpAction from '../../util/ajax/httpAction';
-import FontAwesome from  'react-fontawesome';
-import { Link } from 'react-router-dom';
+
 import MarkDown from 'react-markdown';
-import { MD } from '../../config/test';
+
 import hljs from 'highlight.js';
 import 'highlight.js/styles/monokai-sublime.css';
 import qs from 'qs';
@@ -53,6 +50,7 @@ import BreadcrumbCus from './comment/BreadcrumbCus';
                 <BreadcrumbCus name="正文"/>
                 <Card className="blog">
                     <MarkDown source={this.state.content}></MarkDown>
+                    <div style={{textAlign: 'right'}}>{this.props.currentBlog!=-1&&this.props.blogList[this.props.currentBlog].pub_datetime}</div>
                 </Card>
                 <Comments bloglistid={this.props.match.params.blog}></Comments>
             </div>
@@ -63,6 +61,7 @@ import BreadcrumbCus from './comment/BreadcrumbCus';
 
 function mapStateToProps(state){
     return {
+        currentBlog: state.mainIndex.currentBlog,
         blogList: state.mainIndex.blogList
     }
 }   

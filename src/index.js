@@ -9,7 +9,8 @@ import registerServiceWorker from './registerServiceWorker';
 import { configureStore, history }  from './store/configureStore';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.min.css';
-import './style/index.less'
+import 'react-toastify/dist/ReactToastify.css'; 
+import './style/index.less';
 let store = configureStore()
 
 ReactDOM.render(

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Router, Route, Switch } from 'react-router';
-import { Card, Container, Row, Col, Nav, NavItem, NavLink, Dropdown,ListGroupItem, DropdownMenu,DropdownItem,
-    ListGroup,Jumbotron,Button,Collapse,UncontrolledDropdown
+import { Card, Col, ListGroupItem, 
+    ListGroup,Jumbotron,Button,UncontrolledTooltip
 } from 'reactstrap';
 import FontAwesome from  'react-fontawesome';
  class AboutMe extends Component{
@@ -24,7 +23,7 @@ import FontAwesome from  'react-fontawesome';
               <Card className="" style={{backgroundColor: "#fff"}}>
               <Jumbotron style={{marginBottom:"0px", paddingBottom: "2rem", backgroundColor: "#fff"}}>
                     <h1 className="display-3">Hello, there!</h1>
-                    <p className="lead">这里是一个从中建八局离职转行做码农的小伙子，从现实搬砖到网络搬砖，2017-10-1开始学习网络知识，2018-3-1正式开始互联网工作
+                    <p className="lead">这里是一个从中建八局离职转行做码农的绅士，从现实搬砖到网络搬砖，2017-10-1开始学习网络知识，2018-3-1正式开始互联网工作
                     学的东西参差不齐，希望有大佬能带带我 :)</p>
                     <hr className="my-2" />
                     <p>技能： nodejs(express/koa(nodejs的web框架)、puppeteer(写爬虫)、cheerio); wepy(小程序); typescript(javascript超集); vuejs(新生代); reactjs(厉害了我的哥); java(快忘光了); mysql; reids; mongodb; tomcat; nginx </p>
@@ -86,7 +85,10 @@ import FontAwesome from  'react-fontawesome';
                                     <FontAwesome name="wechat"/>&nbsp;&nbsp;
                                     wechat:
                                 </div>
-                                <div>ape_Caesar_node</div>
+                                <div id="wechat" style={{textDecoration: 'underline'}}>ape_Caesar_node</div>
+                                <UncontrolledTooltip placement="top" target="wechat">
+                                    <img style={{width: '140px', height: '140px'}}src={require('../images/static_imgs/wechat_wdw.png')}></img>
+                                </UncontrolledTooltip>
                             </ListGroupItem>
                             <ListGroupItem>
                                 <div>

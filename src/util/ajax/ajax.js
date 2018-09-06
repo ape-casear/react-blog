@@ -46,9 +46,13 @@ const instance = axios.create(axiosBaseConfig)
 // 请求拦截器
 instance.interceptors.request.use(function (config) {
   if(localStorage.getItem('ACCESS_TOKEN')){
-    let token = JSON.parse(localStorage.getItem('ACCESS_TOKEN'));
-    token = token&&token.token
-    config.headers.authorization = 'Bearer '+ token;
+    try{
+      let token = JSON.parse(localStorage.getItem('ACCESS_TOKEN'));
+      token = token&&token.token
+      config.headers.authorization = 'Bearer '+ token;
+    }catch(e){
+      console.error(e)
+    }
   }
   
   return config;

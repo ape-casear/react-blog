@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Container, Row, Col, Nav, NavItem, NavLink, Dropdown,DropdownToggle, DropdownMenu,DropdownItem,
-    Navbar,NavbarBrand,NavbarToggler,Collapse,Media
+import {  Nav, NavItem, NavLink, Media
 } from 'reactstrap';
 import classnames from 'classnames';
 import FontAwesome from  'react-fontawesome';
 import httpAction from '../../util/ajax/httpAction';
-import qs from 'qs';
+
 import { apiUrl } from '../../config/base'
  class RightBar extends Component{
     constructor(props) {
@@ -90,7 +89,7 @@ import { apiUrl } from '../../config/base'
                     if(item.title)
                     return (<Media key={index} className="media-box">
                         <Media left href="#">
-                            <Media className="media-img" object data-src={item.avatar} src={item.avatar||apiUrl+'/img/expressImg/0101.jpg'} alt="Generic placeholder image" />
+                            <Media className="media-img" src={require('../../images/static_imgs/webPic003.jpeg')} alt="img" />
                         </Media>
                         <Media body className="media-body">
                             <Media className="media-title">

@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Router, Route, Switch } from 'react-router';
-import { Button, Container, Row, Col, Nav, NavItem, NavLink, Dropdown,DropdownToggle, DropdownMenu,DropdownItem,
-    Navbar,NavbarBrand,NavbarToggler,Collapse,UncontrolledDropdown
+import {  Route, Switch } from 'react-router';
+import { Row, Col
 } from 'reactstrap';
 import MainIndex from './main/MainIndex';
 import RightBar from './main/RightBar';
 import BlogContent from './main/BlogContent';
 import ZHScraper from './main/projects/ZHScraper';
-import httpAction from '../util/ajax/httpAction';
+
  class MainBox extends Component{
     constructor(props) {
         super(props);
@@ -31,7 +30,7 @@ import httpAction from '../util/ajax/httpAction';
                             <Route exact path="/" name="index" component={MainIndex}></Route>
                             <Route path="/blog/:blog" name="index" component={BlogContent}></Route>
                             <Route path="/zhihu" name="zhihu" component={ZHScraper}></Route>
-                            <Route path="/bloglist/:page" name="list" component={MainIndex}></Route>
+                            <Route path="/bloglist-category" name="category" component={MainIndex}></Route>
                         </Switch>
                     </Col>
                     <Col className="main-box-right" xs="12">

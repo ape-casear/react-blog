@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Router, Route, Switch } from 'react-router';
-import { Card, Container, Row, Col, Nav, NavItem, NavLink, Dropdown,ListGroupItem, DropdownMenu,DropdownItem,
-    FormFeedback,FormGroup,Button,Label,Input
-} from 'reactstrap';
+import { Card, FormFeedback,FormGroup,Button,Label,Input} from 'reactstrap';
 import FontAwesome from  'react-fontawesome';
 import httpAction from '../../util/ajax/httpAction';
 import { history } from '../../store/configureStore';
-const  jsSHA =require("../../lib/jsSHA/src/sha.js");
+import { ToastContainer, toast } from 'react-toastify';
+const  jsSHA = require("../../lib/jsSHA/src/sha.js");
 class Login extends Component{
     constructor(props) {
         super(props);
@@ -86,10 +84,18 @@ class Login extends Component{
             }
         }))
     }
+    
     submit(){
         if(this.state.emailInput == '' || this.state.passwordInput == ''){
             this.setState({
                 emailMessage: '用户名和密码不能为空',
+                invalid : true
+            })
+            return;
+        }
+        if(!/^\w{6,20}$/.test(this.state.passwordInput)){
+            this.setState({
+                emailMessage: '密码为6-20位字母数字下划线',
                 invalid : true
             })
             return;
@@ -101,12 +107,19 @@ class Login extends Component{
         console.log(password)
 
         if(this.state.mode == 0){
+            /* 登录 */
             this.props.dispatch(httpAction('/user/login', 'post', {author: this.state.emailInput, password }, (res)=>{
                 if(res.data.code == 0){
                     localStorage.ACCESS_TOKEN = JSON.stringify(res.data.data);
                     localStorage.author = this.state.emailInput;
-
-                    history.goBack()
+                    
+                    toast.info("登录成功!", {
+                        position: toast.POSITION.TOP_CENTER,
+                        autoClose: 1500,
+                        className: 'react-toastify'
+                    });
+                    setTimeout(history.goBack, 1500)
+                   
                 }else{
                     this.setState({
                         emailMessage: '用户名或密码错误',
@@ -115,10 +128,17 @@ class Login extends Component{
                 }
             }))
         }else if(this.state.mode == 1){
+            /* 注册 */
             this.props.dispatch(httpAction('/user/', 'post', {author: this.state.emailInput, password }, (res)=>{
                 if(res.data.code == 0){
                     localStorage.ACCESS_TOKEN = JSON.stringify(res.data.data);
-                    history.goBack()
+                    localStorage.author = this.state.emailInput;
+                    toast.info("注册成功!", {
+                        position: toast.POSITION.TOP_CENTER,
+                        autoClose: 1500,
+                        className: 'react-toastify'
+                    });
+                    setTimeout(history.goBack, 1500)
                 }else{
                     this.setState({
                         emailMessage: '注册失败',
@@ -203,6 +223,7 @@ class Login extends Component{
                     })()
                 }
                 </Card>
+                <ToastContainer/>
             </div>
         )
     }
