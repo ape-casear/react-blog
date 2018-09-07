@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Card } from 'reactstrap';
+import { Card, UncontrolledTooltip } from 'reactstrap';
 import httpAction from '../../util/ajax/httpAction';
 
 import MarkDown from 'react-markdown';
-
+import { history } from '../../store/configureStore';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/monokai-sublime.css';
 import qs from 'qs';
 import Comments from './Comments';
 import BreadcrumbCus from './comment/BreadcrumbCus';
+import FontAwesome from  'react-fontawesome';
  class BlogContent extends Component{
     constructor(props) {
         super(props);
@@ -32,6 +33,7 @@ import BreadcrumbCus from './comment/BreadcrumbCus';
             this.setState({
                 content: res.data.data.blog
             })
+            /* 代码高亮 500ms 是在等待markown组件装载完毕 */
             setTimeout(()=>{
                 let blocks = document.querySelectorAll('pre code');
                 console.log(blocks.length)
@@ -41,7 +43,21 @@ import BreadcrumbCus from './comment/BreadcrumbCus';
             }, 500)
         }))
     }
+    goNext(orientation){
+        let search_str, flag = 0;
+        let index = this.props.currentBlog;
+        flag = orientation === 'pre'? -1: 1;
+        let id = this.props.blogList[index + (flag)].id;
+        let title = this.props.blogList[index + (flag)].title;
+        this.props.dispatch({type: "GET_BLOG_LIST_MAIN", payload: {currentBlog: index + (flag)}})
+        search_str = `${id}?title=${title}`
+        history.push('/bus?toblog='+ search_str)
+        /* this.props.dispatch({type: "GET_BLOG_LIST_MAIN", payload: { currentBlog: index}})
+        history.push('/blog/'+ id + "?title=" + title) */
+    }
     render(){
+        let blogList = this.props.blogList
+        let currentBlog = this.props.currentBlog
         return (
             <div className="main-card blog-box">
                 <h2 className="font-white font-shadow">{this.state.title}</h2>
@@ -50,8 +66,32 @@ import BreadcrumbCus from './comment/BreadcrumbCus';
                 <BreadcrumbCus name="正文"/>
                 <Card className="blog">
                     <MarkDown source={this.state.content}></MarkDown>
-                    <div style={{textAlign: 'right'}}>{this.props.currentBlog!=-1&&this.props.blogList[this.props.currentBlog].pub_datetime}</div>
+                    <div style={{textAlign: 'right'}}>{currentBlog!=-1&&blogList[currentBlog].pub_datetime}</div>
                 </Card>
+                {(()=>{
+                    if((currentBlog || currentBlog == 0) && currentBlog != -1){
+                        return (
+                            <div className="blog-nextBlog">
+                                {currentBlog===0?'':(
+                                <div id="blog-pre" className="blog-nextBlog-item" style={{float: 'left'}} onClick={this.goNext.bind(this,'pre')}>
+                                <FontAwesome name="chevron-left"/>&nbsp;
+                                上一篇
+                                <UncontrolledTooltip placement="top" target="blog-pre">
+                                    {blogList[currentBlog-1]&&blogList[currentBlog-1].title}
+                                </UncontrolledTooltip>
+                                </div>)}
+                                {currentBlog===blogList.length-1?"":(
+                                <div id="blog-next" className="blog-nextBlog-item" style={{float: 'right'}} 
+                                onClick={this.goNext.bind(this, 'next')}>
+                                下一篇&nbsp;<FontAwesome name="chevron-right"/>
+                                <UncontrolledTooltip placement="top" target="blog-next">
+                                    {blogList[currentBlog+1]&&blogList[currentBlog+1].title}
+                                </UncontrolledTooltip>
+                                </div>)}
+                            </div>
+                        )
+                    }
+                })()}
                 <Comments bloglistid={this.props.match.params.blog}></Comments>
             </div>
         )

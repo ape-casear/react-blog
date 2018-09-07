@@ -17,9 +17,18 @@ class App extends Component {
   componentDidMount(){
     console.log('app:',this.props)
     if(this.props.location.search){
-      let str = this.props.location.search.replace('category','type')
-      str =str.replace('未分类','unclassify')
-      history.replace('/'+str)
+      if(this.props.location.search.indexOf('toblog') >= 0){
+       /*  history.push('/blog/'+ id + "?title=" + title)  ?toblog= id?title=***   */
+       let str = this.props.location.search.replace('?toblog=','')
+        history.replace('/blog/'+ str)
+      }else if(this.props.location.search.indexOf('category') >= 0){
+        let str = this.props.location.search.replace('category','type')
+        str =str.replace('未分类','unclassify')
+        history.replace('/'+str)
+      }else if(this.props.location.search.indexOf('toUser') >= 0){
+        let str = this.props.location.search.replace('?toUser=','')
+        history.replace('/user/'+ str)
+      }
     }else{
       history.replace('/')
     }

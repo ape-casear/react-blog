@@ -92,7 +92,7 @@ import PaginationCus from './comment/PaginationCus';
                      style={
                     {backgroundImage: "url(" + ((item.img_url)?item.img_url: require('../../images/static_imgs/webPic.jpg')) + ")" }}/>
                     <CardBody className="card-body" onClick={this.toBlog.bind(this, index, item.title, item.id)} >
-                        <CardTitle tag="h4"  onClick={this.toBlog.bind(this, index, item.title, item.id)}>{item.title}</CardTitle>
+                        <CardTitle tag="h4">{item.title}</CardTitle>
                         <CardSubtitle>Card subtitle</CardSubtitle>
                         <hr style={{filter : "alpha(opacity=100,finishopacity=0,style=3)", margin: '0.5em auto', width:"100%"}} />
                         <Nav style={{fontSize: '14px', fontWeight: '300'}}>

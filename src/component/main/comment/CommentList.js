@@ -57,9 +57,9 @@ class CommentList extends Component{
     }
     reply(e){
         let id = e.target.dataset.parent;
-       this.setState({
-           replyIndex: id
-       })
+        this.setState({
+            replyIndex: id
+        })
     }
     cancel(){
         let id = this.props.bloglistid;

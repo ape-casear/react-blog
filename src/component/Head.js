@@ -147,8 +147,8 @@ class Head extends Component{
                             )
                         }else{
                             return (
-                                <DropdownItem data-path="user">
-                                    {this.state.user}
+                                <DropdownItem data-path="user" onClick={this.close}>
+                                    <Link to={"/user/"+this.state.user}>{this.state.user}</Link>
                                 </DropdownItem>
                             )
                         }

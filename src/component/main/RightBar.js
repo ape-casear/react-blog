@@ -5,7 +5,7 @@ import {  Nav, NavItem, NavLink, Media
 import classnames from 'classnames';
 import FontAwesome from  'react-fontawesome';
 import httpAction from '../../util/ajax/httpAction';
-
+import { Link } from 'react-router-dom';
 import { apiUrl } from '../../config/base'
  class RightBar extends Component{
     constructor(props) {
@@ -88,8 +88,10 @@ import { apiUrl } from '../../config/base'
                 {content.contents.map((item,index)=>{
                     if(item.title)
                     return (<Media key={index} className="media-box">
-                        <Media left href="#">
+                        <Media left tag="div">
+                            <Link to={"/bus?toUser="+item.author}>
                             <Media className="media-img" src={require('../../images/static_imgs/webPic003.jpeg')} alt="img" />
+                            </Link>
                         </Media>
                         <Media body className="media-body">
                             <Media className="media-title">
@@ -111,7 +113,9 @@ import { apiUrl } from '../../config/base'
                     return (
                         <Media key={index} className="media-box">
                         <Media left href="#">
+                            <Link to={"/bus?toUser="+item.author}>
                             <Media className="media-img" object data-src={item.avatar} src={item.avatar||apiUrl+'/img/expressImg/0101.jpg'} alt="Generic placeholder image" />
+                            </Link>
                         </Media>
                         <Media body className="media-body">
                             <Media className="media-title" >
