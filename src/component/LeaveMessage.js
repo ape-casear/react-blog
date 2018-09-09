@@ -7,6 +7,7 @@ import { Card
 import CommentList from './main/comment/CommentList';
 import ReplyBox from './main/comment/ReplyBox';
 import saying from '../config/saying';
+import img_001 from '../images/static_imgs/pixiv004.jpg';
  class LeaveMessage extends Component{
     constructor(props) {
         super(props);
@@ -29,7 +30,7 @@ import saying from '../config/saying';
             style={(this.props.window.innerWidth < 768 && this.props.side_toggle == 'on')?{height:(this.props.window.innerHeight-49)+"px", overflow:'hidden'}:{}}
             >
                 <div className="l-message-small-box" style={{}}>
-                <img src={require('../images/static_imgs/pixiv004.jpg')} style={{width: '100%'}}></img>
+                <img src={img_001} style={{width: '100%'}}></img>
                 <Card className="l-message">
                     <p style={{fontSize:'16px'}}>想说啥就<strong color="#333">说</strong>吧!</p>
                     {saying.map((item,index)=>{

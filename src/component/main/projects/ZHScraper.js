@@ -8,7 +8,7 @@ import FontAwesome from  'react-fontawesome';
 import { Link } from 'react-router-dom';
 import qs from 'qs';
 import BreadcrumbCus from '../comment/BreadcrumbCus';
-class ZHScraper extends Component{
+class ZHScraper extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -41,14 +41,16 @@ class ZHScraper extends Component{
         let index = parseInt(e.target.dataset.index);
         let openArr = this.state.openArr;
         openArr.has(index) && openArr.delete(index);
-        this.setState({
-            openArr
-        })
         let openComArr = this.state.openComArr;
         if(openComArr.has(index)){
             openComArr.delete(index);
             this.setState({
-                openComArr
+                openComArr,
+                openArr
+            })
+        }else{
+            this.setState({
+                openArr
             })
         }
     }

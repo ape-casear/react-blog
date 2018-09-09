@@ -4,6 +4,7 @@ import { Card, Col, ListGroupItem,
     ListGroup,Jumbotron,Button,UncontrolledTooltip
 } from 'reactstrap';
 import FontAwesome from  'react-fontawesome';
+import img_001 from  '../images/static_imgs/wechat_wdw.png';
  class AboutMe extends Component{
     constructor(props) {
         super(props);
@@ -87,7 +88,7 @@ import FontAwesome from  'react-fontawesome';
                                 </div>
                                 <div id="wechat" style={{textDecoration: 'underline'}}>ape_Caesar_node</div>
                                 <UncontrolledTooltip placement="top" target="wechat">
-                                    <img style={{width: '140px', height: '140px'}}src={require('../images/static_imgs/wechat_wdw.png')}></img>
+                                    <img style={{width: '140px', height: '140px'}}src={img_001}></img>
                                 </UncontrolledTooltip>
                             </ListGroupItem>
                             <ListGroupItem>

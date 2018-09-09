@@ -131,10 +131,10 @@ class Head extends Component{
                     Options
                     </DropdownToggle>
                     <DropdownMenu right>
-                    <DropdownItem data-path="cute" onClick={this.jumpTo}>
+                    <DropdownItem data-path="cute" >
                         我很可爱
                     </DropdownItem>
-                    <DropdownItem data-path="money" onClick={this.jumpTo}>
+                    <DropdownItem data-path="money" >
                         给我打钱
                     </DropdownItem>
                     <DropdownItem divider />

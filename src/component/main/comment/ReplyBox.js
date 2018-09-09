@@ -57,12 +57,11 @@ class ReplyBox extends Component{
             this.props.dispatch({type:'GET_COMMENT_LIST', payload:{commentList: new_commentList}})
         }else{
             console.log('add comment:',this.props.id)
-            let new_commentList = this.props.commentList;
-            new_commentList.push( newComment )
-            console.log(new_commentList)
+            let new_commentList = [...this.props.commentList, newComment];
+           
             this.props.dispatch({type:'GET_COMMENT_LIST', payload:{commentList: new_commentList}})
         }
-        setTimeout(this.props.callback,1500)
+        this.props.callback&&setTimeout(this.props.callback,1500)
     }
     /* 提交评论 */
     comment(){

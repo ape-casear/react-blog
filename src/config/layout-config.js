@@ -11,33 +11,6 @@ const side_bar = [
             className: 'super-crazy-colors fa-fw'
         },
         sub_link: [
-            {
-                id: 0,
-                className: 'subbar',
-                name: 'app',
-                icon: {
-                    name: 'reply',
-                    className: 'super-crazy-colors fa-fw'
-                },
-            },
-            {
-                id: 1,
-                className: 'subbar',
-                name: 'sub_item',
-                icon: {
-                    name: 'reply',
-                    className: 'super-crazy-colors fa-fw'
-                },
-            },
-            {
-                id: 2,
-                className: 'subbar',
-                name: 'sub_item',
-                icon: {
-                    name: 'reply',
-                    className: 'super-crazy-colors fa-fw'
-                },
-            },
         ]
     },
     {

@@ -15,7 +15,7 @@ class App extends Component {
    
   }
   componentDidMount(){
-    console.log('app:',this.props)
+  
     if(this.props.location.search){
       if(this.props.location.search.indexOf('toblog') >= 0){
        /*  history.push('/blog/'+ id + "?title=" + title)  ?toblog= id?title=***   */

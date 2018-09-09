@@ -44,6 +44,23 @@ import httpAction from '../util/ajax/httpAction';
             })
             this.setState({side_bar})
         }))
+        this.props.dispatch(httpAction('/bloglist/0?type2=2', 'get', null, res=>{
+            let list = res.data.data.bloglist;
+            this.props.dispatch({ type: 'GET_PROJECT_LIST', payload: { projectList: list}})
+            let side_bar = this.state.side_bar;
+            list.forEach((item, index)=>{
+                side_bar[0].sub_link.push({
+                    id: index,
+                    className: 'subbar',
+                    name: item.title,
+                    icon:{
+                        name: 'link',
+                        className: 'super-crazy-colors fa-fw'
+                    }
+                })
+            })
+            this.setState({side_bar})
+        }))
     }
     componentWillUnmount(){
         side_bar[1].sub_link = []
@@ -54,7 +71,12 @@ import httpAction from '../util/ajax/httpAction';
         });
     }
     navigateTo(e){
-        if(e.target.dataset.route){
+        console.log(e.target.dataset.id)
+        if(e.target.dataset.id === '0'){
+            let index =  e.target.dataset.key;
+            let blog = this.props.projectList[index]
+            history.push(`/bus?toblog=${blog.id}?title=${blog.title}`)
+        }else if(e.target.dataset.route && e.target.dataset.id === '1'){
             console.log('navigateTo')
             history.push('/bus?category='+ e.target.dataset.route)
         }
@@ -71,7 +93,7 @@ import httpAction from '../util/ajax/httpAction';
        
     }
     render(){
-        console.log(this.props.side_toggle)
+        console.log('SideBar rereander')
 
         let list = this.state.side_bar.map(item=>{
             return (
@@ -101,10 +123,13 @@ import httpAction from '../util/ajax/httpAction';
                             if(item.sub_link)
                                 return (<UncontrolledCollapse id="" toggler={'#'+item.link.id}>
                                     {item.sub_link.map(sub_item=>{
-                                        return (<NavLink key={sub_item.id} className={sub_item.className} data-route={sub_item.name} href="#" onClick={this.navigateTo}>
-                                        <FontAwesome className={sub_item.icon.className} data-route={sub_item.name} name={sub_item.icon.name} />&nbsp;&nbsp;
-                                        {sub_item.name}
-                                        {sub_item.count&&<Badge tag="span" color="secondary" style={{float: 'right'}}>{sub_item.count}</Badge>}
+                                        return (
+                                        <NavLink key={sub_item.id} data-key={sub_item.id} className={sub_item.className} 
+                                            data-route={sub_item.name} data-id={item.id} href="#" onClick={this.navigateTo}>
+                                            <FontAwesome className={sub_item.icon.className} 
+                                                data-id={item.id} data-route={sub_item.name} name={sub_item.icon.name} />&nbsp;&nbsp;
+                                            {sub_item.name}
+                                            {sub_item.count&&<Badge tag="span" color="secondary" style={{float: 'right'}}>{sub_item.count}</Badge>}
                                         </NavLink>)
                                     })}
                                     </UncontrolledCollapse>)
@@ -144,9 +169,10 @@ import httpAction from '../util/ajax/httpAction';
  }
  function mapStateToProps(state){
     
-    let { layout } = state;
+    let { layout, mainIndex } = state;
     return {
         side_toggle: layout.sidebar,
+        projectList: mainIndex.projectList
     }
 }   
  export default connect(mapStateToProps)(SideBar)

@@ -91,8 +91,9 @@ import { ToastContainer, toast } from 'react-toastify';
         }
     }
     render(){
+        let style_001 = {height: '100%',justifyContent: 'start'};
         return (
-            <div className="main-card" style={{height: '100%',justifyContent: 'start'}}>
+            <div className="main-card" style={style_001}>
                 <Card className="user-profile" style={{}}> 
                     <div className="user-edit" style={this.state.userProfile.self?{}:{display: 'none'}}
                     onClick={this.edit}>{this.state.mode===0?'':'编辑'}</div>

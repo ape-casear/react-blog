@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Card, CardBody, CardTitle, CardSubtitle, CardText, CardLink
 } from 'reactstrap';
 import FontAwesome from  'react-fontawesome';
-
+import img_001 from  '../images/static_imgs/pixiv001.jpg';
 class UpInfo extends Component{
     constructor(props) {
         super(props);
@@ -13,18 +13,18 @@ class UpInfo extends Component{
         }
 
     }
-
     render(){
+        let style_001 = {borderRadius:"0px"};
         return (
             <div className="up-info">
-                 <Card style={{borderRadius:"0px"}}>
+                 <Card style={style_001}>
                     <CardBody>
                         <CardTitle>Ape-Caesar</CardTitle>
                         <CardSubtitle>
                             <FontAwesome className="fa fa-fw" name="graduation-cap"/>
                             天津大学</CardSubtitle>
                     </CardBody>
-                    <img width="100%" src={require('../images/static_imgs/pixiv001.jpg')} alt="Card image cap" />
+                    <img width="100%" src={img_001} alt="Card image cap" />
                     <CardBody style={{padding: '0.5rem'}}>
                         <CardText>welcome to my blog</CardText>
                         <CardLink href="https://www.bilibili.com" target="_blank">BiliBili</CardLink>

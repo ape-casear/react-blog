@@ -99,6 +99,7 @@ class CommentList extends Component{
         }
     }
     render(){
+        console.log('CommentList rerender')
         return (
             <div className="comment-list">
                 <p style={{fontSize:'16px'}}>{this.state.comment_length}条{this.props.mode||'评论'}

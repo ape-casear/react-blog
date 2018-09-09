@@ -9,6 +9,7 @@ import FontAwesome from  'react-fontawesome';
 import AboutMe from './AboutMe';
 import LeaveMessage from './LeaveMessage';
 import {stopEvent} from '../util/html-util/stopEvent'
+import img_001 from '../images/static_imgs/kotori.png'
  class BigTable extends Component{
     constructor(props) {
         super(props);
@@ -42,7 +43,7 @@ import {stopEvent} from '../util/html-util/stopEvent'
                 {(()=>{
                     if(this.props.window.innerWidth > 768){
                         return (
-                            <img src={require("../images/static_imgs/kotori.png")}></img>
+                            <img src={img_001}></img>
                         )
                     }else{
                         return (

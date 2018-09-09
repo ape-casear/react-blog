@@ -24,7 +24,7 @@ class Comments extends Component{
     render(){
         return (
             <Card className="comment-box">
-                <ReplyBox bloglistid={this.props.bloglistid} callback={this.tellBtoReRender}/>
+                <ReplyBox bloglistid={this.props.bloglistid}/>
                 <CommentList bloglistid={this.props.bloglistid} work={this.state.goToWork}/>
             </Card>
         )

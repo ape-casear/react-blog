@@ -7,6 +7,8 @@ import FontAwesome from  'react-fontawesome';
 import httpAction from '../../util/ajax/httpAction';
 import { Link } from 'react-router-dom';
 import { apiUrl } from '../../config/base'
+import { history } from '../../store/configureStore';
+import img_001 from '../../images/static_imgs/webPic003.jpeg';
  class RightBar extends Component{
     constructor(props) {
         super(props);
@@ -90,12 +92,12 @@ import { apiUrl } from '../../config/base'
                     return (<Media key={index} className="media-box">
                         <Media left tag="div">
                             <Link to={"/bus?toUser="+item.author}>
-                            <Media className="media-img" src={require('../../images/static_imgs/webPic003.jpeg')} alt="img" />
+                            <Media className="media-img" src={img_001} alt="img" />
                             </Link>
                         </Media>
                         <Media body className="media-body">
                             <Media className="media-title">
-                                {item.title}
+                                <Link to={`/bus?toblog=${item.id}?title=${item.title}`}>{item.title}</Link>
                             </Media>
                             <div className="foot-box">
                                 <div>
@@ -111,12 +113,13 @@ import { apiUrl } from '../../config/base'
                     </Media>)
                     else
                     return (
-                        <Media key={index} className="media-box">
-                        <Media left href="#">
+                        <Media key={index} className="media-box media-box-hover">
+                        <Media left tag="div">
                             <Link to={"/bus?toUser="+item.author}>
                             <Media className="media-img" object data-src={item.avatar} src={item.avatar||apiUrl+'/img/expressImg/0101.jpg'} alt="Generic placeholder image" />
                             </Link>
                         </Media>
+                        <Link to={`/bus?toblog=${item.bloglistid}`}>
                         <Media body className="media-body">
                             <Media className="media-title" >
                                 {item.author}
@@ -124,7 +127,8 @@ import { apiUrl } from '../../config/base'
                             <div className="foot-box">
                                 {item.comment}
                             </div>
-                            </Media>
+                        </Media>
+                        </Link>
                         </Media>
                     )
                 })}

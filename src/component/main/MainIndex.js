@@ -8,6 +8,7 @@ import qs from 'qs';
 import { history } from '../../store/configureStore';
 import PaginationCus from './comment/PaginationCus';
 
+import img_001 from '../../images/static_imgs/webPic.jpg';
  class MainIndex extends Component{
     constructor(props) {
         super(props);
@@ -90,7 +91,7 @@ import PaginationCus from './comment/PaginationCus';
                 <Card className="card-item" key={index}>
                     <div className="card-img" key="3" onClick={this.toBlog.bind(this, index, item.title, item.id)}  
                      style={
-                    {backgroundImage: "url(" + ((item.img_url)?item.img_url: require('../../images/static_imgs/webPic.jpg')) + ")" }}/>
+                    {backgroundImage: "url(" + ((item.img_url)?item.img_url:img_001) + ")" }}/>
                     <CardBody className="card-body" onClick={this.toBlog.bind(this, index, item.title, item.id)} >
                         <CardTitle tag="h4">{item.title}</CardTitle>
                         <CardSubtitle>Card subtitle</CardSubtitle>
