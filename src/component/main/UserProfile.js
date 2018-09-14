@@ -91,7 +91,7 @@ import { ToastContainer, toast } from 'react-toastify';
         }
     }
     render(){
-        let style_001 = {height: '100%',justifyContent: 'start'};
+        let style_001 = {justifyContent: 'start', marginBottom: 0, height: '100%'};
         return (
             <div className="main-card" style={style_001}>
                 <Card className="user-profile" style={{}}> 

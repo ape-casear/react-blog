@@ -23,7 +23,7 @@ import Bus from '../App';
     render(){
         return (
             <div className="main-box" 
-            style={(this.props.window.innerWidth < 768 && this.props.side_toggle == 'on')?{height:(this.props.window.innerHeight-49)+"px", overflow:'hidden'}:{}}
+            style={(this.props.window.innerWidth < 768 && this.props.side_toggle == 'on')?{height:(this.props.window.innerHeight-49)+"px", overflow:'hidden'}:{minHeight: (this.props.window.innerHeight-49)+"px" }}
             >
                 <Row style={{marginRight: '-14px',marginLeft: '-14px'}}>
                     <Col className="main-box-left" xs="12" >
@@ -39,6 +39,7 @@ import Bus from '../App';
                         <RightBar></RightBar>
                     </Col>
                 </Row>
+                <div className="beian" ><a href="http://www.miitbeian.gov.cn/">粤ICP备18112646号</a></div>
             </div>
         )
     }
