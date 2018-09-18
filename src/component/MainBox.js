@@ -21,11 +21,15 @@ import Bus from '../App';
         
     }
     render(){
+        let rowStyle = {marginRight: '-14px',marginLeft: '-14px'};
+        if (this.props.window.innerWidth > 768) {
+            rowStyle = {marginRight: '-14px',marginLeft: '-14px', minHeight: (this.props.window.innerHeight-49)+"px"};
+        }
         return (
             <div className="main-box" 
             style={(this.props.window.innerWidth < 768 && this.props.side_toggle == 'on')?{height:(this.props.window.innerHeight-49)+"px", overflow:'hidden'}:{minHeight: (this.props.window.innerHeight-49)+"px" }}
             >
-                <Row style={{marginRight: '-14px',marginLeft: '-14px'}}>
+                <Row style={rowStyle}>
                     <Col className="main-box-left" xs="12" >
                         <Switch>
                             <Route exact path="/" name="index" component={MainIndex}></Route>

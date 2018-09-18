@@ -63,7 +63,8 @@ import httpAction from '../util/ajax/httpAction';
         }))
     }
     componentWillUnmount(){
-        side_bar[1].sub_link = []
+        side_bar[1].sub_link = [];
+        side_bar[0].sub_link = [];
     }
     toggle() {
         this.setState({
