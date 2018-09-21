@@ -6,6 +6,9 @@ import FontAwesome from  'react-fontawesome';
 export default function BreadcrumbCus(props){
     function weiboShare(){
         let wb_shareBtn = document.getElementById("shareBtn")
+        if (!wb_shareBtn){
+            setTimeout( weiboShare, 1000)
+        }
         let wb_url = document.URL; //获取当前页面地址，也可自定义例：wb_url = "http://liuyanzhao.com"
         let wb_appkey = "4022133664";//你的app key
         let wb_title = "ape_Caesar的博客";
@@ -14,7 +17,7 @@ export default function BreadcrumbCus(props){
         let wb_language = "zh_cn";
         wb_shareBtn.setAttribute("href","http://service.weibo.com/share/share.php?url="+wb_url+"&appkey="+wb_appkey+"&title="+wb_title+"&pic="+wb_pic+"&ralateUid="+wb_ralateUid+"&language="+wb_language+"");
     }
-    setTimeout(weiboShare, 2000);
+    setTimeout(weiboShare, 500);
     
     return (
         <div style={{width: "100%"}}>

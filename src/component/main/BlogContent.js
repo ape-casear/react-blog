@@ -43,6 +43,9 @@ import FontAwesome from  'react-fontawesome';
             }, 500)
         }))
     }
+    componentWillUnmount(){
+        this.props.dispatch({type: "GET_BLOG_LIST_MAIN", payload: { currentBlog: -1}})
+    }
     goNext(orientation){
         let search_str, flag = 0;
         let index = this.props.currentBlog;

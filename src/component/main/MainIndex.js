@@ -51,6 +51,7 @@ import img_001 from '../../images/static_imgs/webPic.jpg';
         this.props.dispatch({type: "GET_BLOG_LIST_MAIN", payload: { currentBlog: index}})
         history.push('/blog/'+ id + "?title=" + title)
     }
+
     cb(page){
         let query = '?'; 
         this.state.query.forEach(item=>{

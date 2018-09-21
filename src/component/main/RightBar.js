@@ -22,6 +22,8 @@ import img_001 from '../../images/static_imgs/webPic003.jpeg';
         this.toggle = this.toggle.bind(this);
         this.composeContent = this.composeContent.bind(this);
         this.getWebInfo = this.getWebInfo.bind(this);
+        this.jump = this.jump.bind(this);
+        this.getMenu = this.getMenu.bind(this);
     }
     getWebInfo(){
         return (
@@ -41,6 +43,36 @@ import img_001 from '../../images/static_imgs/webPic003.jpeg';
                     })}
                 </div>
             </div>
+        )
+    }
+    jump(item){
+        item.scrollIntoView && item.scrollIntoView();
+        window.scrollTo(0, window.scrollY - 100);
+    }
+    getMenu(){
+        console.log('getMenu launch')
+        let tagMap = {
+            H1: [22,1], H2: [20,2], H3: [18,3], H4: [16,4], H5: [14,5], H6: [12,6], H7: [10,7]
+        }
+        let blog = document.querySelector('.blog');
+        if(!blog)return;
+        let hs = blog.querySelectorAll('h1,h2,h3,h4,h5,h6,h7');
+        console.log(hs[1].tagName)
+       
+        let hDoms = Array.from(hs).map((item,index)=>{
+            return (
+                <div key={index} style={{fontSize: tagMap[item.tagName][0]}} onClick={this.jump.bind(this, item)}>
+                {(()=>{
+                    return new Array(tagMap[item.tagName][1]).fill('-')
+                    /* .map((item,index)=>{
+                        return( <span key={index}>&nbsp;</span>)
+                    }) */
+                })()}
+                {item.innerHTML}</div>
+            )
+        })
+        return (
+            <div className="blog-menu">{hDoms}</div>
         )
     }
     toggle(tab) {
@@ -163,6 +195,16 @@ import img_001 from '../../images/static_imgs/webPic003.jpeg';
                 </Nav>
                 {content}
                 {webinfo}
+                {
+                    (()=>{
+                        if(this.props.currentBlog >= 0 && this.state.show && this.props.innerWidth > 768){
+                            return this.getMenu();
+                        }else{
+                            console.log(this.props.currentBlog)
+                            console.log(this.state.show)
+                        }
+                    })()
+                }
             </div>
         )
     }
@@ -171,8 +213,9 @@ import img_001 from '../../images/static_imgs/webPic003.jpeg';
     
     
     return {
-        goTop:state.window.goTop
-        
+        goTop: state.window.goTop,
+        currentBlog: state.mainIndex.currentBlog,
+        innerWidth: state.window.innerWidth,
     }
 }   
  export default connect(mapStateToProps)(RightBar)
