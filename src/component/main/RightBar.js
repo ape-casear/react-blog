@@ -197,11 +197,8 @@ import img_001 from '../../images/static_imgs/webPic003.jpeg';
                 {webinfo}
                 {
                     (()=>{
-                        if(this.props.currentBlog >= 0 && this.state.show && this.props.innerWidth > 768){
+                        if(/\/blog\/[0-9]+/.test(location.href) && this.state.show && this.props.innerWidth > 768){
                             return this.getMenu();
-                        }else{
-                            console.log(this.props.currentBlog)
-                            console.log(this.state.show)
                         }
                     })()
                 }
@@ -214,7 +211,6 @@ import img_001 from '../../images/static_imgs/webPic003.jpeg';
     
     return {
         goTop: state.window.goTop,
-        currentBlog: state.mainIndex.currentBlog,
         innerWidth: state.window.innerWidth,
     }
 }   
