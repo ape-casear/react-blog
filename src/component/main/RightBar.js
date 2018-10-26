@@ -57,6 +57,9 @@ import img_001 from '../../images/static_imgs/webPic003.jpeg';
         let blog = document.querySelector('.blog');
         if(!blog)return;
         let hs = blog.querySelectorAll('h1,h2,h3,h4,h5,h6,h7');
+        if (hs.length <= 0) {
+            return;
+        }
         console.log(hs[1].tagName)
        
         let hDoms = Array.from(hs).map((item,index)=>{
