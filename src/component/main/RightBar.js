@@ -64,7 +64,7 @@ import img_001 from '../../images/static_imgs/webPic003.jpeg';
        
         let hDoms = Array.from(hs).map((item,index)=>{
             return (
-                <div key={index} style={{fontSize: tagMap[item.tagName][0]}} onClick={this.jump.bind(this, item)}>
+                <div key={index} onClick={this.jump.bind(this, item)}>
                 {(()=>{
                     return new Array(tagMap[item.tagName][1]).fill('-')
                     /* .map((item,index)=>{
@@ -75,7 +75,10 @@ import img_001 from '../../images/static_imgs/webPic003.jpeg';
             )
         })
         return (
-            <div className="blog-menu">{hDoms}</div>
+            <div className="blog-menu">
+                <div style={{fontSize: "1.5rem"}}>目录</div>
+                {hDoms}
+            </div>
         )
     }
     toggle(tab) {
@@ -200,7 +203,7 @@ import img_001 from '../../images/static_imgs/webPic003.jpeg';
                 {webinfo}
                 {
                     (()=>{
-                        if(/\/blog\/[0-9]+/.test(location.href) && this.state.show && this.props.innerWidth > 768){
+                        if(/\/blog\/[0-9]+/.test(window.location.href) && this.state.show && this.props.innerWidth > 768){
                             return this.getMenu();
                         }
                     })()
