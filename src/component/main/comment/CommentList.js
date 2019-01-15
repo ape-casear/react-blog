@@ -52,8 +52,8 @@ class CommentList extends Component{
         }))
     }
     componentWillReceiveProps(nextProps){
-        console.log('old props',this.props.work)
-        console.log('new props',nextProps.work)
+        /* console.log('old props',this.props.work)
+        console.log('new props',nextProps.work) */
     }
     reply(e){
         let id = e.target.dataset.parent;

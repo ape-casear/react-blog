@@ -104,7 +104,7 @@ class Login extends Component{
         shaObj.update(this.state.passwordInput+'wdwblog')
         //console.log(this.state.passwordInput+'wdwblog')
         let password = shaObj.getHash("HEX");
-        console.log(password)
+        // console.log(password)
 
         if(this.state.mode == 0){
             /* 登录 */

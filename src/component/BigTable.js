@@ -66,8 +66,8 @@ import img_003 from '../images/gif/bear2.gif';
                         if(this.state.waitImg) {
                             return (
                                 <div className="wait-Img" style={{height: this.props.window.innerHeight, width: this.props.window.innerWidth}}>
-                                    <img src={img_003}></img>
-                                    <div>马上就加载好了……</div>
+                                    {/* <img src={img_003}></img> */}
+                                    <div><FontAwesome name="circle-o-notch" spin/>&nbsp;马上就加载好……</div>
                                 </div>
                             )
                         }

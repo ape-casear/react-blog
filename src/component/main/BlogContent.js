@@ -25,7 +25,6 @@ import FontAwesome from  'react-fontawesome';
         console.log('BlogContent did mount')
         let id = this.props.match.params.blog;
         let { title } = qs.parse(this.props.location.search.replace('?',''))
-        console.log(qs.parse)
         this.setState({
             title
         })
@@ -36,7 +35,6 @@ import FontAwesome from  'react-fontawesome';
             /* 代码高亮 500ms 是在等待markown组件装载完毕 */
             setTimeout(()=>{
                 let blocks = document.querySelectorAll('pre code');
-                console.log(blocks.length)
                 blocks.forEach((block) => {
                     hljs.highlightBlock(block)
                 })

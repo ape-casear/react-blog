@@ -5,7 +5,7 @@ const initColor = { color: 'blue' }
 export default  handleActions(
     {
         'switch red'(state, action){
-            console.log(state)
+            // console.log(state)
             return { ...state, ...action.payload }
         },
         'switch blue'(state, action){

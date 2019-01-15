@@ -14,8 +14,8 @@ import 'highlight.js/styles/monokai-sublime.css';
         this.goBack = this.goBack.bind(this);
     }
     componentDidMount(){
-        console.log('list',this.props.length)
-        console.log('index',this.props.index)
+        /* console.log('list',this.props.length)
+        console.log('index',this.props.index) */
     }
     pageTo(e){
         let page = parseInt(e.target.dataset.page);
@@ -23,7 +23,7 @@ import 'highlight.js/styles/monokai-sublime.css';
         this.props.callback(page)
     }
     goBack(){
-        console.log('pageindex:',this.props.index)
+        // console.log('pageindex:',this.props.index)
         if(this.props.index - 1 < 1){
             return;
         }
@@ -31,7 +31,7 @@ import 'highlight.js/styles/monokai-sublime.css';
         this.props.callback(page)
     }
     goNext(){
-        console.log('pageindex:',this.props.maxPage)
+        // console.log('pageindex:',this.props.maxPage)
         if(this.props.index + 1 > this.props.maxPage){
             return;
         }
