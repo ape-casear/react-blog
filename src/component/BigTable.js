@@ -27,19 +27,23 @@ import img_003 from '../images/gif/bear2.gif';
         
     }
     componentDidMount(){
-        const myimg = new Image();
+        /* const myimg = new Image();
         myimg.src = img_002;
-        let timeout = 15;
+        // let timeout = 15;
         const that = this;
-        const myinterval = window.setInterval(()=>{
-            console.log('i appear '+(15-timeout)+' time')
+        myimg.onload = function () {
+            that.setState({
+                waitImg: false,
+            });
+        } */
+        /* const myinterval = window.setInterval(()=>{
             if (myimg.complete === true || timeout--  < 0) {
                 window.clearInterval(myinterval);
                 that.setState({
                     waitImg: false,
                 });
             }
-        }, 100)
+        }, 100) */
     }
     goTop(){
         window.scrollTo(0,0)

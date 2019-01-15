@@ -5,7 +5,7 @@ import FontAwesome from  'react-fontawesome';
 import httpAction from '../../util/ajax/httpAction';
 import { history } from '../../store/configureStore';
 import { ToastContainer, toast } from 'react-toastify';
-const  jsSHA = require("../../lib/jsSHA/src/sha.js");
+const  jsSHA = require("jssha");
 class Login extends Component{
     constructor(props) {
         super(props);

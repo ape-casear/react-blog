@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, Switch } from 'react-router';
 import './index.css';
-import Login from './component/login/Login';
+import Login from './component/login/login';
 import BigTable from './component/BigTable'
 import registerServiceWorker from './registerServiceWorker';
 import { configureStore, history }  from './store/configureStore';
