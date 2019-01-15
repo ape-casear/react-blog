@@ -27,15 +27,17 @@ import img_003 from '../images/gif/bear2.gif';
         
     }
     componentDidMount(){
-        /* const myimg = new Image();
+        const myimg = new Image();
         myimg.src = img_002;
         // let timeout = 15;
         const that = this;
         myimg.onload = function () {
-            that.setState({
-                waitImg: false,
-            });
-        } */
+            setTimeout(() =>{
+                that.setState({
+                    waitImg: false,
+                });
+            }, 200)
+        }
         /* const myinterval = window.setInterval(()=>{
             if (myimg.complete === true || timeout--  < 0) {
                 window.clearInterval(myinterval);
